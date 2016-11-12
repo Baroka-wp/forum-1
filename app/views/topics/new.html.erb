@@ -1,6 +1,8 @@
 <div class="container">
-	<h2>New Topic</h2>
-
+	<h1>New Topic</h1>
+	
+	<h2><%= @topic.user.email %></h2>
+	<p><%= @topic.created_at %></p>
 	<div class="form-group">
 		<%= form_for @topic , :url => topics_path(@topic) do |f| %>
 			<%= f.label :title , "Title : " %>
