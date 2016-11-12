@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   	resources :topics
   end
 
-  resources :topics
+  resources :topics do
+  	resources :comments , :controller => "topic_comments"
+  end
 
 
 

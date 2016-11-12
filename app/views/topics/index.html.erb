@@ -15,7 +15,7 @@
 		
 		<% @topics.each do |t| %>
 			<tr>
-				<td><%= link_to t.tital , topic_path(t) %></td>
+				<td><%= link_to t.title , topic_path(t) %></td>
 				<td><%= link_to t.user.email , user_path(t.user) %></td>
 				<td><%= t.t_time %></td>
 			</tr>

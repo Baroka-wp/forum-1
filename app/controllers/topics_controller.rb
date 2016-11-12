@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:tital , :t_content , :t_time , :user_id )
+		params.require(:topic).permit(:title , :t_content , :t_time , :user_id )
 	end
 
 

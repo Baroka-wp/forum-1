@@ -3,8 +3,8 @@
 
 	<div class="form-group">
 		<%= form_for @topic , :url => topics_path(@topic) do |f| %>
-			<%= f.label :tital , "Title : " %>
-			<%= f.text_field :tital , :class => "form-control" %>
+			<%= f.label :title , "Title : " %>
+			<%= f.text_field :title , :class => "form-control" %>
 			<%= f.label :t_content , "Content : " %>
 			<%= f.text_area :t_content , :rows => "20" , :class => "form-control" %>
 			<%= f.hidden_field :t_time , :value => Time.now %>
