@@ -1,0 +1,13 @@
+<div class="container">
+	
+	<div class="form-group">
+		<%= form_for @topic , :url => topic_path(@topic) , :method => :patch do |f| %>
+			<%= render :partial => "form" , :locals => {:f => f} %>
+		<% end %>
+		<%= link_to "Cancel" , topic_path(@topic) , :class => "btn btn-primary pull-right" %>
+	</div>
+
+
+		
+
+</div>

@@ -1,0 +1,22 @@
+.clearfix {
+	clear: both;
+}
+
+.topic_show {
+	background-color: #ccc;
+	padding : 20px;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 0 30px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.form-group label {
+	font-size: 18px;
+	margin: 10px 0;
+}

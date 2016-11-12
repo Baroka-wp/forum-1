@@ -11,18 +11,33 @@
   <body>
 
 	<div class="container">
-		<% if current_user %>
-		    <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-		    <%= link_to('修改密碼', edit_registration_path(:user)) %>
-		<% else %>
-		    <%= link_to('註冊', new_registration_path(:user)) %> |
-		    <%= link_to('登入', new_session_path(:user)) %>
-		<% end %>
+		<div class="pull-right">
+
+			<div class="btn-group">
+			  <button type="button" class="btn btn-info"><%= current_user.email %></button>
+			  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <span class="caret"></span>
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+				<% if current_user %>
+				  <ul class="dropdown-menu">
+			  	
+				    <li><%= link_to('修改密碼', edit_registration_path(:user) ) %></li>
+				    <li role="separator" class="divider"></li>
+				    <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+			     </ul>
+			    <% else %>
+					<%= link_to('註冊', new_registration_path(:user)) %> |
+				    <%= link_to('登入', new_session_path(:user)) %>
+				<% end %>
+			</div>
+
+			
+			    
+		</div>
 	</div>
 
 
-
-	
 	<div class="container">
 		<% if flash[:notice].present? %>
 			<div class="alert alert-success" role="alert">
@@ -37,8 +52,10 @@
 			</div> 
 		<% end %>
 	</div>
-	
 
+	
     <%= yield %>
+    
+
   </body>
 </html>

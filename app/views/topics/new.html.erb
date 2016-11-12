@@ -1,0 +1,21 @@
+<div class="container">
+	<h2>New Topic</h2>
+
+	<div class="form-group">
+		<%= form_for @topic , :url => topics_path(@topic) do |f| %>
+			<%= f.label :tital , "Title : " %>
+			<%= f.text_field :tital , :class => "form-control" %>
+			<%= f.label :t_content , "Content : " %>
+			<%= f.text_area :t_content , :rows => "20" , :class => "form-control" %>
+			<%= f.hidden_field :t_time , :value => Time.now %>
+			<%= f.hidden_field :user_id , :value => @user.id %>
+			<br>
+			<%= f.submit :class => "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+		
+</div>
+
+
+
+

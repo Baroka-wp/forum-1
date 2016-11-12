@@ -1,0 +1,35 @@
+<div class="container">
+	<div class="form-group">
+		<%= form_for @topic , :url => topic_path(@topic) , :method => :patch do |f| %>
+			<%= f.label :tital , "Tital : " %>
+			<%= f.text_field :tital , :class => "form-control" %>
+			<%= f.label :t_content , "Content : " %>
+			<%= f.text_area :t_content , :rows => "20" , :class => "form-control" %>
+		<% end %>
+
+	<br>
+	<% if current_user == @topic.user %>
+		<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success" %>
+		<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger pull-right" %>
+	<% end %>
+	</div>	
+
+	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
+		
+	<!-- <div class="topic_show">
+		<h2><%= @topic.tital %></h2>
+		<h4>User : <%= @topic.user.email %></h4>
+		<p><%= @topic.t_time %></p>
+		<p><%= @topic.t_content %></p>
+	</div> -->
+	
+</div>
+	
+
+
+
+
+
+
+
+

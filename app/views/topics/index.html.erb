@@ -1,0 +1,26 @@
+<div class="container">
+	<h1>Forum</h1>
+
+	<%= link_to "New" , new_topic_path , :class => "btn btn-primary" %>
+	<br>
+	<%= paginate @topics %>
+	
+
+	<table class="table table-striped">
+		<tr>
+			<th>主題</th>
+			<th>發文者</th>
+			<th>發文時間</th>
+		</tr>
+		
+		<% @topics.each do |t| %>
+			<tr>
+				<td><%= link_to t.tital , topic_path(t) %></td>
+				<td><%= link_to t.user.email , user_path(t.user) %></td>
+				<td><%= t.t_time %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+	
+
