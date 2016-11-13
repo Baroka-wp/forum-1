@@ -2,6 +2,10 @@
 	clear: both;
 }
 
+.table th {
+	font-size: 18px;
+}
+
 .topic_show {
 	background-color: #ccc;
 	padding : 20px;

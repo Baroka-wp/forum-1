@@ -1,6 +1,9 @@
 <div class="container">
 	<h1>Forum</h1>
 
+	<%= link_to "Sort by last Reply" , topics_path( :order => "update" ) , :class => "btn btn-primary" %>
+	<%= link_to "Sort by Count of Reply" , topics_path( :order => "count") , :class => "btn btn-primary" %>
+	<%= link_to "Sort by Default" , topics_path , :class => "btn btn-primary" %>
 	<%= link_to "New" , new_topic_path , :class => "btn btn-primary" %>
 	<br>
 	<%= paginate @topics %>
@@ -10,14 +13,16 @@
 		<tr>
 			<th>主題</th>
 			<th>發文者</th>
-			<th>發文時間</th>
+			<th>最後回覆時間</th>
+			<th>回覆</th>
 		</tr>
 		
 		<% @topics.each do |t| %>
 			<tr>
 				<td><%= link_to t.title , topic_path(t) %></td>
 				<td><%= link_to t.user.email , user_path(t.user) %></td>
-				<td><%= t.t_time %></td>
+				<td><%= t.comments.last.try(:created_at) %></td>
+				<td><%= t.comments.count %></td>
 			</tr>
 		<% end %>
 	</table>

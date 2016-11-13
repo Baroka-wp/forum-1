@@ -1,5 +1,6 @@
 class TopicCommentsController < ApplicationController
-
+	
+	before_action :authenticate_user!
 	before_action :find_topic , :find_user
 
 	def new 
@@ -9,7 +10,7 @@ class TopicCommentsController < ApplicationController
 	def create
 		@comment = @topic.comments.build( write_comment )
 		if @comment.save
-			flash[:notice] = "回復成功"
+			flash[:notice] = "回覆成功"
 			redirect_to topic_path(@topic)
 		else
 			render "new"

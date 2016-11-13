@@ -3,7 +3,16 @@ class TopicsController < ApplicationController
 	before_action :find_user
 
 	def index
-		@topics = Topic.page(params[:page]).per(15)
+		if params[:order] == "update"
+			sort_by = "comments.created_at"
+		elsif params[:order] == "Reply" 
+			sort_by = "comments.count"
+		else
+			sort_by = "created_at"
+		end 
+		#sort_by = (params[:order] == "update") ? "comments.created_at" : "created_at"
+
+		@topics = Topic.includes(:comments , :user).order(sort_by).reverse_order.page(params[:page]).per(15)
 	end
 
 	def show 
@@ -12,6 +21,7 @@ class TopicsController < ApplicationController
 	end
 
 	def new
+		authenticate_user!
 		@topic = @user.topics.build
 	end
 
@@ -55,7 +65,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :t_time , :user_id )
+		params.require(:topic).permit(:title , :t_content , :user_id )
 	end
 
 
