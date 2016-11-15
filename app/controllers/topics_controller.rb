@@ -3,16 +3,41 @@ class TopicsController < ApplicationController
 	before_action :find_user
 
 	def index
-		if params[:order] == "update"
-			sort_by = "comments.created_at"
-		elsif params[:order] == "Reply" 
-			sort_by = "comments.count"
-		else
-			sort_by = "created_at"
-		end 
-		#sort_by = (params[:order] == "update") ? "comments.created_at" : "created_at"
 
-		@topics = Topic.includes(:comments , :user).order(sort_by).reverse_order.page(params[:page]).per(15)
+		if !params[:keyword] 
+			
+
+			case params[:order]
+			when "update"
+				sort_by = "comments.created_at"
+			when "Reply"
+				sort_by = "comments.count"
+			when "created_at"
+			end
+			@topics = Topic.includes(:comments , :user).order(@sort_by).reverse_order.page(params[:page]).per(15)
+		else	
+
+			case params[:keyword]
+			when "RPG"
+				@search_by = "RPG"
+			when "Action" 
+				@search_by = "Action"
+			when "Racing"
+				@search_by = "Racing"
+			when "FPS"
+				@search_by = "FPS"
+			end
+
+			case params[:order]
+			when "update"
+				@sort_by = "comments.created_at"
+			when "Reply"
+				@sort_by = "comments.count"
+			when "created_at"
+			end
+
+			@topics = Topic.includes(:comments , :user , :categories).where( "categories.name" => "#{@search_by}" ).order(@sort_by).reverse_order.page(params[:page]).per(10)
+		end
 	end
 
 	def show 
@@ -65,7 +90,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id )
+		params.require(:topic).permit(:title , :t_content , :user_id , :category_ids => [])
 	end
 
 

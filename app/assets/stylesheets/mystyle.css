@@ -12,7 +12,7 @@
 	margin-bottom: 20px;
 }
 
-.form-group {
+form {
 	border-radius: 15px;
 	margin-top: 20px;
 	padding: 30px 20px 20px 20px;
@@ -20,7 +20,7 @@
 	background-color: #D5EDF8;
 }
 
-.form-group label {
+form label {
 	font-size: 18px;
 	margin: 10px 0;
 }
