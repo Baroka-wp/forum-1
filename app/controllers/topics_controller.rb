@@ -8,13 +8,13 @@ class TopicsController < ApplicationController
 			
 
 			case params[:order]
-			when "update"
+			when "Update"
 				sort_by = "comments.created_at"
 			when "Reply"
-				sort_by = "comments.count"
+				sort_by = "comments_count"
 			when "created_at"
 			end
-			@topics = Topic.includes(:comments , :user).order(@sort_by).reverse_order.page(params[:page]).per(15)
+			@topics = Topic.includes(:comments , :user).order(sort_by).reverse_order.page(params[:page]).per(15)
 		else	
 
 			case params[:keyword]
@@ -29,14 +29,14 @@ class TopicsController < ApplicationController
 			end
 
 			case params[:order]
-			when "update"
-				@sort_by = "comments.created_at"
+			when "Update"
+				sort_by = "comments.created_at"
 			when "Reply"
-				@sort_by = "comments.count"
+				sort_by = "comments_count"
 			when "created_at"
 			end
 
-			@topics = Topic.includes(:comments , :user , :categories).where( "categories.name" => "#{@search_by}" ).order(@sort_by).reverse_order.page(params[:page]).per(10)
+			@topics = Topic.includes(:comments , :user , :categories).where( "categories.name" => "#{@search_by}" ).order(sort_by).reverse_order.page(params[:page]).per(10)
 		end
 	end
 
@@ -81,6 +81,18 @@ class TopicsController < ApplicationController
 		redirect_to topics_path
 	end
 
+	def about
+		@users = User.all
+		@topics = Topic.all
+		@comments = Comment.all
+	end
+
+	def profile
+		@user = current_user
+		@topics = @user.topics
+		@comments = @user.comments
+	end
+
 
 
 	private
@@ -90,7 +102,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :category_ids => [])
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :category_ids => [] )
 	end
 
 

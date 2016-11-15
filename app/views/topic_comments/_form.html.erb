@@ -9,6 +9,7 @@
 <%= f.label :c_content , "Content : " %>
 <%= f.text_area :c_content , :rows => "20" , :class => "form-control" %>
 <%= f.hidden_field :user_id , :value => @user.id %>
+<%= f.hidden_field :comments_count => @topic.comments.count  %>
 <br>
 <%= f.submit :class => "btn btn-success pull-left" %>
 

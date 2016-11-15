@@ -18,6 +18,5 @@
 <div class="form-group">
 	<%= f.hidden_field :t_time , :value => Time.now %>
 	<%= f.hidden_field :user_id , :value => @user.id %>
-	<%= f.hidden_field :count , :value => @topic.comments.count %>
 </div>
 	<%= f.submit :class => "btn btn-primary pull-right" %>

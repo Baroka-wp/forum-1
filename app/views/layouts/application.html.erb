@@ -16,7 +16,7 @@
 
 				<% if current_user %>
 					<div class="btn-group">
-					  <button type="button" class="btn btn-info"><%= current_user.email %></button>
+					  <%= link_to current_user.email , profile_topics_path , :type => "button" , :class => "btn btn-info" %>
 					  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    <span class="caret"></span>
 					    <span class="sr-only">Toggle Dropdown</span>
