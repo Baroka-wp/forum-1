@@ -1,33 +1,35 @@
 <div class="container">
-<br>
-<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
-<br>
-<br>
-
-	
-
-	<div class="form-group">
-
-		<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
-		<% if current_user == @topic.user %>
-			<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger pull-right" %>
-			<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success pull-right" %>
-		<% end %>
-
-		
+	<br>
+	<%= link_to "My Favorites" %>
+	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
+	<div class="clearfix"></div>
 		<%= form_for @topic do |f| %>
+
+			<div class="btn">
+				<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
+				<% if current_user == @topic.user %>
+					<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger" %>
+					<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success" %>
+				<% end %>
+				
+			</div>
+			<div class="clearfix"></div>
 			<%= f.label :title , "Title : " %>
 			<%= f.text_field :title ,  :disabled => "disabled" , :class => "form-control" %>
-			<h2><%= @topic.user.email %></h2>
+			<h3><%= @topic.user.email %></h3>
 			<p><%= @topic.created_at %></p>
 			<%= f.label :t_content , "Content : " %>
 			<%= f.text_area :t_content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
 		<% end %>
-	</div>
+
 
 	<div class="form-group">
 		<% @comment.each do |c| %>
 			<%= form_for c , :url => "" do |f| %>
+				<% if c.user == current_user %>
+					<%= link_to "Edit" , edit_topic_comment_path(@topic , c) , :class => "btn btn-success" %>
+					<%= link_to "Delete" , topic_comment_path(@topic , c) , :method => :delete , :class => "btn btn-danger" %>
+				<% end %>
 				<h2>Reply : </h2>
 				<h3><%= c.user.email %></h3>
 				<p><%= c.created_at %></p>

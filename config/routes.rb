@@ -5,13 +5,15 @@ Rails.application.routes.draw do
 
   resources :users do 
   	resources :topics
+    collection do
+        get :profile
+    end
   end
 
   resources :topics do
   	resources :comments , :controller => "topic_comments"
   	collection do
         get :about 
-        get :profile
     end
   end
 

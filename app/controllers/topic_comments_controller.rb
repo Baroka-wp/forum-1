@@ -17,6 +17,28 @@ class TopicCommentsController < ApplicationController
 		end
 	end
 
+	def edit
+		@comment = @topic.comments.find(params[:id])
+	end
+
+	def update
+		@comment = @topic.comments.find(params[:id])
+		if @comment.update(write_comment)
+			flash[:notice]
+			redirect_to topic_path(@topic)
+		else
+			render "edit"
+		end
+	end
+
+	def destroy
+		@comment = @topic.comments.find(params[:id])
+		@comment.destroy
+		flash[:alert] = "刪除成功"
+		redirect_to topic_path(@topic)
+	end
+
+
 
 	private
 

@@ -4,10 +4,10 @@
 	<%= link_to "About" , about_topics_path , :class => "btn btn-default pull-right" %>
 
 	<div class="check_box">
-		<%= link_to "RPG" , topics_path( :keyword => "RPG" ) , :class => "btn btn-warning" %>
-		<%= link_to "Action" , topics_path( :keyword => "Avtion" ) , :class => "btn btn-warning"%>
-		<%= link_to "Racing" , topics_path( :keyword => "Racing" ) , :class => "btn btn-warning" %>
-		<%= link_to "FPS" , topics_path( :keyword => "FPS" ) , :class => "btn btn-warning" %>
+		<%= link_to "RPG" , topics_path( :keyword => "1" ) , :class => "btn btn-warning" %>
+		<%= link_to "Action" , topics_path( :keyword => "2" ) , :class => "btn btn-warning"%>
+		<%= link_to "Racing" , topics_path( :keyword => "3" ) , :class => "btn btn-warning" %>
+		<%= link_to "FPS" , topics_path( :keyword => "4" ) , :class => "btn btn-warning" %>
 		<%= link_to "Default" , topics_path , :class => "btn btn-warning" %>
 	</div>
 	
@@ -16,6 +16,7 @@
 	<div class="sort">
 		<%= link_to "Sort by last Reply" , topics_path( :order => "Update" , :keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "Sort by Count of Reply" , topics_path( :order => "Reply" , :keyword => @search_by ) , :class => "btn btn-primary" %>
+		<%= link_to "Sort by Count of Views" , topics_path( :order => "Views" , :keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "Sort by Default" , topics_path(:keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "New" , new_topic_path , :class => "btn btn-primary" %>
 	</div>
@@ -30,14 +31,20 @@
 			<th>發文者</th>
 			<th>最後回覆時間</th>
 			<th>回覆</th>
+			<th>瀏覽數</th>
 		</tr>
 		
 		<% @topics.each do |t| %>
 			<tr>
 				<td><%= link_to t.title , topic_path(t) %></td>
 				<td><%= link_to t.user.email , user_path(t.user) %></td>
-				<td><%= t.comments.last.try(:created_at) %></td>
+				<% if params.try(:order) == 'Update' %>
+					<td><%= t.comments.last.try(:created_at) %></td>
+				<% else %>
+					<td><%= t.comments.first.try(:created_at) %></td>
+				<% end %>
 				<td><%= t.comments_count %></td>
+				<td><%= t.views_count %></td>
 			</tr>
 		<% end %>
 	</table>

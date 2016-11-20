@@ -6,42 +6,47 @@ class TopicsController < ApplicationController
 
 		if !params[:keyword] 
 			
-
 			case params[:order]
 			when "Update"
-				sort_by = "comments.created_at"
+				sort_by = "comments.created_at DESC"
 			when "Reply"
-				sort_by = "comments_count"
+				sort_by = "comments_count DESC"
+			when "Views"
+				sort_by = "views_count DESC"
 			when "created_at"
 			end
-			@topics = Topic.includes(:comments , :user).order(sort_by).reverse_order.page(params[:page]).per(15)
+			@topics = Topic.includes(:comments , :user).order(sort_by).page(params[:page]).per(15)
 		else	
 
 			case params[:keyword]
-			when "RPG"
-				@search_by = "RPG"
-			when "Action" 
-				@search_by = "Action"
-			when "Racing"
-				@search_by = "Racing"
-			when "FPS"
-				@search_by = "FPS"
+			when "1"
+				@search_by = "1"
+			when "2" 
+				@search_by = "2"
+			when "3"
+				@search_by = "3"
+			when "4"
+				@search_by = "4"
 			end
 
 			case params[:order]
 			when "Update"
-				sort_by = "comments.created_at"
+				sort_by = "comments.created_at DESC"
 			when "Reply"
-				sort_by = "comments_count"
+				sort_by = "comments_count DESC"
+			when "Views"
+			sort_by = "views_count DESC"
 			when "created_at"
 			end
 
-			@topics = Topic.includes(:comments , :user , :categories).where( "categories.name" => "#{@search_by}" ).order(sort_by).reverse_order.page(params[:page]).per(10)
+			@topics = Topic.includes(:comments , :user , :categories).where( "category.id = :val1 OR category.id = :val2", val1: 1 , val2: 2 ).order(sort_by).page(params[:page]).per(10)
 		end
 	end
 
 	def show 
 		@topic = Topic.find(params[:id])
+		views = 1 + @topic.views_count
+		@topic.update(:views_count => views)
 		@comment = @topic.comments
 	end
 
@@ -87,11 +92,7 @@ class TopicsController < ApplicationController
 		@comments = Comment.all
 	end
 
-	def profile
-		@user = current_user
-		@topics = @user.topics
-		@comments = @user.comments
-	end
+	
 
 
 
@@ -102,7 +103,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :category_ids => [] )
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :category_ids => [] )
 	end
 
 
