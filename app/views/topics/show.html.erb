@@ -1,6 +1,10 @@
 <div class="container">
 	<br>
-	<%= link_to "My Favorites" %>
+
+	<% if current_user %>
+	<%= link_to "My Favorites" , favorite_users_path , :class => "btn btn-info" %>
+	<% end %>
+	
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	<div class="clearfix"></div>
 		<%= form_for @topic do |f| %>

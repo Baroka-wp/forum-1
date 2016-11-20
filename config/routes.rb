@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   	resources :topics
     collection do
         get :profile
+        get :favorite
     end
   end
 

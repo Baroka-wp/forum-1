@@ -4,43 +4,23 @@ class TopicsController < ApplicationController
 
 	def index
 
-		if !params[:keyword] 
-			
-			case params[:order]
-			when "Update"
-				sort_by = "comments.created_at DESC"
-			when "Reply"
-				sort_by = "comments_count DESC"
-			when "Views"
-				sort_by = "views_count DESC"
-			when "created_at"
-			end
-			@topics = Topic.includes(:comments , :user).order(sort_by).page(params[:page]).per(15)
-		else	
-
-			case params[:keyword]
-			when "1"
-				@search_by = "1"
-			when "2" 
-				@search_by = "2"
-			when "3"
-				@search_by = "3"
-			when "4"
-				@search_by = "4"
-			end
-
-			case params[:order]
-			when "Update"
-				sort_by = "comments.created_at DESC"
-			when "Reply"
-				sort_by = "comments_count DESC"
-			when "Views"
+		case params[:order]
+		when "Update"
+			sort_by = "comments.created_at DESC"
+		when "Reply"
+			sort_by = "comments_count DESC"
+		when "Views"
 			sort_by = "views_count DESC"
-			when "created_at"
-			end
-
-			@topics = Topic.includes(:comments , :user , :categories).where( "category.id = :val1 OR category.id = :val2", val1: 1 , val2: 2 ).order(sort_by).page(params[:page]).per(10)
+		when "created_at"
 		end
+		
+		@topics = Topic.includes(:comments , :user).order(sort_by).page(params[:page]).per(15)
+		
+		if params[:keyword] 
+			@search_by = params[:keyword]
+			@topics = Topic.includes(:comments , :user , :categories).where( "categories.id" => @search_by ).order(sort_by).page(params[:page]).per(15)
+		end
+
 	end
 
 	def show 

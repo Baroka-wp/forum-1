@@ -9,6 +9,11 @@ class UsersController < ApplicationController
 		@comments = @user.comments
 	end
 
+	# def favorite
+	# 	@user = current_user
+	# 	@favorite = Favorite.where( :user_id => @user.id )
+	# end
+
 	def update
 		@user = User.new(params.require(:user).permit(:nickname , :current_password ))
 		if @user.save
