@@ -1,0 +1,14 @@
+<div class="container">
+	<h2>Show</h2>
+
+	<%= form_for @category , :url => "" do |f| %>
+		<div class="form-group">
+			<%= f.label :name , "Name : " %>
+			<%= f.text_field :name , :disabled => "disabled" , :class => "form-control" %>
+		</div>
+	<% end %>
+</div>
+
+
+
+

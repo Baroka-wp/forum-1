@@ -5,7 +5,10 @@
 		<% end %>
 	</ul>
 <% end %>
-
+<div class="form-group">
+	<%= f.label :draft , "Draft" %>
+	<%= f.check_box :draft, {}, 'true' , 'false' %>
+</div>
 <div class="form-group">
 	<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
 </div>
@@ -16,7 +19,6 @@
 	<%= f.label :t_content , "Content : " %>
 	<%= f.text_area :t_content , :rows => "20" , :class => "form-control" %>
 <div class="form-group">
-	<%= f.hidden_field :t_time , :value => Time.now %>
 	<%= f.hidden_field :user_id , :value => @user.id %>
 </div>
 	<%= f.submit :class => "btn btn-primary pull-right" %>

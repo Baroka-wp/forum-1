@@ -9,6 +9,28 @@ class UsersController < ApplicationController
 		@comments = @user.comments
 	end
 
+	def favorite
+		@user = current_user
+		@favorites = @user.favorites
+	end
+
+	def draft
+		@user = current_user
+		@topics = @user.topics.where( :draft => true)
+		@comments = @user.comments.where( :draft => true)
+	end
+
+	def update_draft
+		@topic = Topic.find(params[:topic_id])
+		if @topic.update(params.require(:topic).permit(:draft , :title))
+			flash[:notice] = "OOOO"
+			redirect_to draft_users_path
+		else
+			flash[:alert] = "XXXX"
+			render "draft"
+		end
+	end
+
 	# def favorite
 	# 	@user = current_user
 	# 	@favorite = Favorite.where( :user_id => @user.id )

@@ -1,0 +1,15 @@
+<div class="container">
+	<h2>edit</h2>
+	
+	<%= form_for @category , :url => admin_category_path(@category) , :method => :patch do |f| %>
+		<div class="form-group">
+			<%= f.label :name , "Name" %>
+			<%= f.text_field :name , :class => "form-control" %>
+		</div>
+		<%= f.submit :class => "btn btn-success" %>
+	<% end %>
+
+</div>
+
+	
+

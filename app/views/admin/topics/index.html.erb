@@ -1,0 +1,34 @@
+<div class="container">
+	<h1>後台</h1>
+	<%= link_to "Categories" , admin_categories_path , :class => "btn btn-warning pull-right" %>
+	<%= link_to "Users" , admin_users_path , :class => "btn btn-warning pull-right" %>
+	<%= paginate @topics %>
+
+	<table class="table table-striped">
+		<tr>
+			<th>主題</th>
+			<th>發文者</th>
+			<th>最後回覆時間</th>
+			<th>回覆</th>
+			<th>瀏覽數</th>
+			<th>Delete</th>
+		</tr>
+		
+		<% @topics.each do |t| %>
+			<tr>
+				<td><%= link_to t.title , topic_path(t) %></td>
+				<td><%= link_to t.user.email , user_path(t.user) %></td>
+				<% if params.try(:order) == 'Update' %>
+					<td><%= t.comments.last.try(:created_at) %></td>
+				<% else %>
+					<td><%= t.comments.first.try(:created_at) %></td>
+				<% end %>
+				<td><%= t.comments_count %></td>
+				<td><%= t.views_count %></td>
+				<td><%= link_to "Delete" , admin_topic_path(t) , :method => :delete  , :class => "btn btn-danger" %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+	
+

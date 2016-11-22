@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120070057) do
+ActiveRecord::Schema.define(version: 20161121074121) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -31,7 +31,17 @@ ActiveRecord::Schema.define(version: 20161120070057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
+    t.boolean  "draft"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_favorites_on_topic_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -42,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161120070057) do
     t.datetime "updated_at",                 null: false
     t.integer  "comments_count", default: 0
     t.integer  "views_count",    default: 0
+    t.boolean  "draft"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
@@ -59,6 +70,7 @@ ActiveRecord::Schema.define(version: 20161120070057) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "nickname"
+    t.string   "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,17 +1,17 @@
 <div class="container">
 	<h1>Forum</h1>
 	
+	<% if @user.try(:role) == "admin" %>
+		<%= link_to "後台" , admin_topics_path , :class => "btn btn-danger" %>
+	<% end %>
 	<%= link_to "About" , about_topics_path , :class => "btn btn-default pull-right" %>
 
 	<div class="check_box">
-		<%= link_to "RPG" , topics_path( :keyword => 1 ) , :class => "btn btn-warning" %>
-		<%= link_to "Action" , topics_path( :keyword => 2 ) , :class => "btn btn-warning"%>
-		<%= link_to "Racing" , topics_path( :keyword => 3 ) , :class => "btn btn-warning" %>
-		<%= link_to "FPS" , topics_path( :keyword => 4 ) , :class => "btn btn-warning" %>
+		<% @categories.each do |c| %>
+			<%= link_to c.name , topics_path(:keyword => c) , :class => "btn btn-warning" %>
+		<% end %>
 		<%= link_to "Default" , topics_path , :class => "btn btn-warning" %>
 	</div>
-	
-	
 
 	<div class="sort">
 		<%= link_to "Sort by last Reply" , topics_path( :order => "Update" , :keyword => @search_by ) , :class => "btn btn-primary" %>

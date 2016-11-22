@@ -1,26 +1,11 @@
 <div class="container">
 	<h2>Hello! <%= @user.email %></h2>
 
+	<%= link_to "My Favorite" , favorite_users_path , :class => "btn btn-info" %>
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
+	<%= link_to "My Draft" , draft_users_path , :class => "btn btn-warning" %>
 	<div class="clearfix"></div>
-
-	<%= form_for @user , :url => user_path(@user) , :method => :patch do |f| %>
-	<% if @user.errors.any? %>
-		<ul>
-			<% @user.errors.full_messages.each do |msg| %>
-				<li><%= msg %></li> 
-			<% end %>
-		</ul>
-	<% end %>
-		<div class="form-group">
-			<%= f.label :nickname , "NickName : " %>
-			<%= f.text_field :nickname , :class => "form-control"%>
-		</div>
-		
-		<p>You had <%= @user.topics.count %> Topics</p>
-		<p>You already reply <%= @user.comments.count %> comments</p>
-		<%= f.submit :class => "btn btn-success pull-right" %>
-	<% end %>
+	
 	
 	<% @topics.each do |t| %>
 		<%= form_for t , :url => "" , :method => :patch do |f| %>

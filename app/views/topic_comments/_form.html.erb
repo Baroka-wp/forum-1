@@ -6,8 +6,14 @@
 	</ul>
 <% end %>
 
+<div class="form-group">
+	<%= f.label :draft , "Draft" %>
+	<%= f.check_box :draft, {}, "true" , "false" %>
+</div>
+<div class="form-group">
 <%= f.label :c_content , "Content : " %>
 <%= f.text_area :c_content , :rows => "20" , :class => "form-control" %>
+</div>
 <%= f.hidden_field :user_id , :value => @user.id %>
 
 <br>

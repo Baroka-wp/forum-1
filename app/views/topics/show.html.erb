@@ -2,7 +2,9 @@
 	<br>
 
 	<% if current_user %>
-	<%= link_to "My Favorites" , favorite_users_path , :class => "btn btn-info" %>
+		<%= form_for @favorite , :url => user_favorites_path(@user , :topic_id => @topic) do |f| %>
+			<%= f.submit "Add My Favorite" , :class => "btn btn-info" %>
+		<% end %>
 	<% end %>
 	
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>

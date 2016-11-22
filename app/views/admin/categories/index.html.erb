@@ -1,0 +1,31 @@
+<div class="container">
+	<h2>Category</h2>
+	
+	<%= link_to "Topics" , admin_topics_path , :class => "btn btn-warning pull-right" %>
+	<%= link_to "Users" , admin_users_path , :class => "btn btn-warning pull-right" %>
+	<%= link_to "New Category" , new_admin_category_path , :class => "btn btn-primary" %>
+
+	<table class="table table-striped">
+		<tr>
+			<th width=40%>Id</th>
+			<th width=40%>Name</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>	
+
+		<% @cateogries.each do |category| %>
+			<tr>
+				<td><%= category.id %></td>
+				<td><%= link_to category.name , admin_category_path(category) %></td>
+				<td><%= link_to "Edit" , edit_admin_category_path(category) , :class => "btn btn-warning" %></td>
+				<% if category.topics.count == 0 %>
+					<td><%= link_to "Delete" , admin_categories_path(category) , :mehtod => :delete , :class => "btn btn-danger" %></td>
+				<% else %>
+					<td></td>	
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+</div>
+	
+

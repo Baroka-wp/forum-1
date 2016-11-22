@@ -1,10 +1,9 @@
-class TopicsController < ApplicationController
-
+class Admin::TopicsController < ApplicationController
+	before_action :authenticate_user! 
+	before_action :authenticate_admin
 	before_action :find_user
 	
 	def index
-
-		@categories = Category.all
 
 		case params[:order]
 		when "Update"
@@ -25,43 +24,6 @@ class TopicsController < ApplicationController
 
 	end
 
-	def show 
-		@topic = Topic.find(params[:id])
-		views = 1 + @topic.views_count
-		@topic.update(:views_count => views)
-		@comment = @topic.comments.where( :draft => true )
-		@favorite = @user.favorites.build
-	end
-
-	def new
-		authenticate_user!
-		@topic = @user.topics.build
-	end
-
-	def create
-		@topic = @user.topics.build(wirte_topic)
-		if @topic.save
-			flash[:notice] = "新增成功"
-			redirect_to topics_path
-		else
-			render "new"
-		end
-	end
-
-	def edit
-		@topic = Topic.find(params[:id])
-	end
-
-	def update
-		@topic = Topic.find(params[:id])
-		if @topic.update(wirte_topic)
-			flash[:notice] = "更新成功"
-			redirect_to topic_path(@topic)
-		else
-			render "edit"
-		end
-	end
-
 	def destroy
 		@topic = Topic.find(params[:id])
 		@topic.destroy
@@ -69,14 +31,8 @@ class TopicsController < ApplicationController
 		redirect_to topics_path
 	end
 
-	def about
-		@users = User.all
-		@topics = Topic.all
-		@comments = Comment.all
-	end
-
 	
-	private
+	protected
 
 	def find_user
 		@user = current_user
@@ -86,5 +42,11 @@ class TopicsController < ApplicationController
 		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :category_ids => [] )
 	end
 
+	def authenticate_admin
+		unless current_user.admin?
+		flash[:alert] = "Not allow!"
+		redirect_to topics_path
+		end
+	end
 
 end

@@ -1,0 +1,18 @@
+<div class="container">
+	<h2>My Favorites</h2>
+	
+	<%= link_to "Back Profile" , profile_users_path , :class => "btn btn-primary pull-right" %> 
+	<br>
+	<br>
+	<% @favorites.each do |favorite| %>
+		<%= form_for favorite.topic , :url => "" do |f| %>
+			<%= f.label :title , "Title : " %>
+			<%= f.text_field :title , :disabled => "disabled" , :class => "form-control" %>
+			<%= f.label :t_content , "Content : " %>
+			<%= f.text_area :t_content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
+		<% end %> 
+	<% end %>
+</div>
+
+
+

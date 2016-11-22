@@ -1,0 +1,28 @@
+<div class="container">
+	<h2>User</h2>
+
+	<%= link_to "Topics" , admin_topics_path , :class => "btn btn-warning pull-right" %>
+	<%= link_to "Categories" , admin_categories_path , :class => "btn btn-warning pull-right" %>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Role</th>
+			<th>Email</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.role %></td>
+				<td><%= user.email %></td>
+				<td><%= link_to "Edit" , edit_admin_user_path(user) , :class => "btn btn-warning" %></td>
+				<td><%= link_to "Delete" , admin_user_path(user) , :method => :delete , :class => "btn btn-danger" %></td>
+			</tr>
+
+		<% end %>
+	</table>
+</div>
+
+	
+

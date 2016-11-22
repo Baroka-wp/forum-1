@@ -1,0 +1,44 @@
+<div class="container">
+	<h2>Darft</h2>
+
+	<h3>Topics :</h3>
+	<% @topics.each do |t| %>
+		<%= form_for t , :url => update_draft_users_path(t , :topic_id => t.id ) , :method => :patch do |f| %>
+			<div class="form-group">
+				<%= f.label :draft , "Draft" %>
+				<%= f.check_box :draft, {}, 'true' , 'false' %>
+			</div>
+			<div class="form-group">
+				<%= f.label :title , "Title : " %>
+				<%= f.text_field :title , :class => "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :t_content , "Content : " %>
+				<%= f.text_area :t_content , :rows => "15" , :class => "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.hidden_field :draft , :value => "true" %>
+			</div>
+			<%= f.submit :class => "btn btn-success" %>
+		<% end %>
+	<% end %>
+
+	<h3>Comments : </h3>
+	<% @comments.each do |c| %>
+		<%= form_for c , :url => topic_path(c) , :method => :patch do |f| %>
+			<div class="form-group">
+				<%= f.label :title , "Title : " %>
+				<%= f.text_field :title , :class => "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :t_content , "Content : " %>
+				<%= f.text_area :t_content , :rows => "15" , :class => "form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.hidden_field :draft , :value => "true" %>
+			</div>
+
+		<% end %>
+	<% end %>
+</div>
+	
