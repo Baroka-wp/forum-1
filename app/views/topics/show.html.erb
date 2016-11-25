@@ -3,9 +3,9 @@
 
 	<% if current_user %>
 		<% if current_user.favorited_topics.include?(@topic) %>
-			<%= button_to "Add My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
-		<% else %>
 			<%= button_to "Delete My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
+		<% else %>
+			<%= button_to "Add My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
  		<% end %>
  		<br>
 
@@ -19,10 +19,13 @@
 	<br>
 
 	
-	
-	<% @favorite_users.each do |user| %>
-		<%= user.email %>
-	<% end %>
+	<div class="users">
+		<h3 class="text-center">關注的使用者</h3>
+		<% @favorite_users.each do |user| %>
+			<%= user.email %>
+		<% end %>
+	</div>
+		
 
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	

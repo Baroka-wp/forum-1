@@ -1,7 +1,7 @@
 <% if current_user.favorited_topics.include?(@topic) %>
 	<% value = "Delete My Faovrites" %>
 <% else %>
-	<% value = "Add My Faovrites" %>
+	<% value = "Add My Favorites" %>
 <% end %>
 
 $("#favorite[type=submit]").val("<%= value %>")
