@@ -42,6 +42,11 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def like
+		@user = current_user
+		@favorites = @user.favorites
+	end
+
 	# def favorite
 	# 	@user = current_user
 	# 	@favorite = Favorite.where( :user_id => @user.id )

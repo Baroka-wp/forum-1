@@ -34,8 +34,15 @@ class TopicCommentsController < ApplicationController
 	def destroy
 		@comment = @topic.comments.find(params[:id])
 		@comment.destroy
-		flash[:alert] = "刪除成功"
-		redirect_to topic_path(@topic)
+
+		respond_to do |format|
+			format.html {
+				flash[:alert] = "刪除成功"
+				redirect_to topic_path(@topic) 
+			}
+			format.js
+		end
+		
 	end
 
 

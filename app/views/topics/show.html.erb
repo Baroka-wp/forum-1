@@ -61,7 +61,7 @@
 			<%= form_for c , :url => "" do |f| %>
 				<% if c.user == current_user %>
 					<%= link_to "Edit" , edit_topic_comment_path(@topic , c) , :class => "btn btn-success" %>
-					<%= link_to "Delete" , topic_comment_path(@topic , c) , :method => :delete , :class => "btn btn-danger" %>
+					<%= link_to "Delete" , topic_comment_path(@topic , c) , :method => :delete , :class => "btn btn-danger" , :remote => true %>
 				<% end %>
 				<h2>Reply : </h2>
 					<% if @topic.avatar.url != "/images/original/missing.png" %>

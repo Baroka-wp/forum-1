@@ -1,0 +1,19 @@
+<div class="container">
+	<h2>My Like</h2>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Title</th>
+			<th>User</th>
+		</tr>
+		
+		<% @favorites.each do |favorite| %>
+			<tr>
+				<td><%= favorite.topic.title %></td>
+				<td><%= favorite.topic.user.email %></td>
+			</tr>
+		<% end %>
+		
+	</table>
+	
+</div>

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   	resources :topics
     collection do
         get :profile
-        # get :favorite
+        get :favorite
+        get :like
         get :draft
         patch :update_draft
     end
