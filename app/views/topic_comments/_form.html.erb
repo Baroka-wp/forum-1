@@ -7,6 +7,9 @@
 <% end %>
 
 <div class="form-group">
+	<%= f.file_field :avatar %>
+</div>
+<div class="form-group">
 	<%= f.label :draft , "Draft" %>
 	<%= f.check_box :draft, {}, "true" , "false" %>
 </div>
@@ -17,5 +20,5 @@
 <%= f.hidden_field :user_id , :value => @user.id %>
 
 <br>
-<%= f.submit :class => "btn btn-success pull-left" %>
+<%= f.submit :class => "btn btn-success" %>
 

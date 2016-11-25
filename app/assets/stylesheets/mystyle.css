@@ -12,7 +12,7 @@
 	margin-bottom: 20px;
 }
 
-form {
+.new_topic {
 	border-radius: 15px;
 	margin-top: 20px;
 	padding: 30px 20px 20px 20px;
@@ -20,8 +20,91 @@ form {
 	background-color: #D5EDF8;
 }
 
-form label {
+.new_topic label {
 	font-size: 18px;
 	margin: 10px 0;
 }
+
+.edit_topic {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.edit_topic label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.new_comment {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.new_comment label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.edit_comment {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.edit_comment label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.edit_user {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.edit_user label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.new_category {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.new_category label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.edit_category {
+	border-radius: 15px;
+	margin-top: 20px;
+	padding: 30px 20px 20px 20px;
+	padding-bottom : 50px;
+	background-color: #D5EDF8;
+}
+
+.edit_category label {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+
+
+
+
 

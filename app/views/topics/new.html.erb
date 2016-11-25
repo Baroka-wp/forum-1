@@ -4,9 +4,9 @@
 	<h2><%= @topic.user.email %></h2>
 	<p><%= @topic.created_at %></p>
 	
-		<%= form_for @topic , :url => topics_path(@topic) do |f| %>
-			<%= render :partial => "form" , :locals => {:f => f} %>
-		<% end %>
+	<%= form_for @topic , :url => topics_path(@topic) do |f| %>
+		<%= render :partial => "form" , :locals => {:f => f} %>
+	<% end %>
 </div>
 
 

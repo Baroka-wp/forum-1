@@ -47,7 +47,7 @@ class TopicCommentsController < ApplicationController
 	end
 
 	def write_comment
-		params.require(:comment).permit(:c_content , :user_id)
+		params.require(:comment).permit(:draft , :c_content , :user_id , :avatar)
 	end
 
 	def find_user

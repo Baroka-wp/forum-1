@@ -2,30 +2,57 @@
 	<br>
 
 	<% if current_user %>
-		<%= form_for @favorite , :url => user_favorites_path(@user , :topic_id => @topic) do |f| %>
-			<%= f.submit "Add My Favorite" , :class => "btn btn-info" %>
+		<% if current_user.favorited_topics.include?(@topic) %>
+			<%= button_to "Add My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
+		<% else %>
+			<%= button_to "Delete My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
+ 		<% end %>
+ 		<br>
+
+		<% if current_user.liked_topics.include?(@topic) %>
+			<%= button_to "Unlike" , like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" %>
+		<% else %>
+			<%= button_to "Like" , like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" %>
 		<% end %>
 	<% end %>
-	
-	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
-	<div class="clearfix"></div>
-		<%= form_for @topic do |f| %>
 
+	<br>
+
+	
+	
+	<% @favorite_users.each do |user| %>
+		<%= user.email %>
+	<% end %>
+
+	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
+	
+	<div class="clearfix"></div>
+		<%= form_for @topic do |f|  %>
 			<div class="btn">
 				<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
 				<% if current_user == @topic.user %>
 					<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger" %>
 					<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success" %>
 				<% end %>
-				
 			</div>
-			<div class="clearfix"></div>
+
+			<% if @topic.avatar.url != "/images/original/missing.png" %>
+				<div class="form-group text-center">
+					<%= image_tag @topic.avatar.url %>
+				</div>
+			<% end %>
+			<div class="form-group">
 			<%= f.label :title , "Title : " %>
 			<%= f.text_field :title ,  :disabled => "disabled" , :class => "form-control" %>
+			</div>
+			<div class="form-group">
 			<h3><%= @topic.user.email %></h3>
 			<p><%= @topic.created_at %></p>
+			</div>
+			<div class="form-group">
 			<%= f.label :t_content , "Content : " %>
 			<%= f.text_area :t_content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
+			</div>
 		<% end %>
 
 
@@ -37,6 +64,11 @@
 					<%= link_to "Delete" , topic_comment_path(@topic , c) , :method => :delete , :class => "btn btn-danger" %>
 				<% end %>
 				<h2>Reply : </h2>
+					<% if @topic.avatar.url != "/images/original/missing.png" %>
+					<div class="form-group text-center">
+						<%= image_tag c.avatar.url %>
+					</div>
+				<% end %>
 				<h3><%= c.user.email %></h3>
 				<p><%= c.created_at %></p>
 				<%= f.label :c_content , "Content : " %>
@@ -47,11 +79,3 @@
 
 </div>
 	
-
-
-
-
-
-
-
-

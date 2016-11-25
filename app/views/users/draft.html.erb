@@ -3,7 +3,7 @@
 
 	<h3>Topics :</h3>
 	<% @topics.each do |t| %>
-		<%= form_for t , :url => update_draft_users_path(t , :topic_id => t.id ) , :method => :patch do |f| %>
+		<%= form_for t , :url => update_draft_users_path(:topic_id => t.id ) , :method => :patch do |f| %>
 			<div class="form-group">
 				<%= f.label :draft , "Draft" %>
 				<%= f.check_box :draft, {}, 'true' , 'false' %>
@@ -15,9 +15,6 @@
 			<div class="form-group">
 				<%= f.label :t_content , "Content : " %>
 				<%= f.text_area :t_content , :rows => "15" , :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.hidden_field :draft , :value => "true" %>
 			</div>
 			<%= f.submit :class => "btn btn-success" %>
 		<% end %>

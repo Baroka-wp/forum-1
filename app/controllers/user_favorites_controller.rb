@@ -13,6 +13,8 @@ class UserFavoritesController < ApplicationController
 	end
 
 
+
+
 	private
 
 	def write_favorite

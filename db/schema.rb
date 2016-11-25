@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121074121) do
+ActiveRecord::Schema.define(version: 20161124132328) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -28,10 +28,14 @@ ActiveRecord::Schema.define(version: 20161121074121) do
   create_table "comments", force: :cascade do |t|
     t.text     "c_content"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "topic_id"
     t.boolean  "draft"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -44,15 +48,28 @@ ActiveRecord::Schema.define(version: 20161121074121) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_likes_on_topic_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string   "title"
     t.text     "t_content"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "comments_count", default: 0
-    t.integer  "views_count",    default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "comments_count",      default: 0
+    t.integer  "views_count",         default: 0
     t.boolean  "draft"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
@@ -71,7 +88,14 @@ ActiveRecord::Schema.define(version: 20161121074121) do
     t.datetime "updated_at",                          null: false
     t.string   "nickname"
     t.string   "role"
+    t.string   "fb_uid"
+    t.string   "fb_token"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["fb_uid"], name: "index_users_on_fb_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

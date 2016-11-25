@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
 	def show
-		@user = User.find(params[:id])
+		@user = current_user
+	end
+
+	def update 
+		@user = current_user
+		if @user.update(write_user)
+			flash[:notice] = "OOOO"
+			redirect_to profile_users_path
+		else
+			flash[:alert] = "XXXX"
+			render "profile"
+		end
 	end
 
 	def profile
@@ -22,7 +33,7 @@ class UsersController < ApplicationController
 
 	def update_draft
 		@topic = Topic.find(params[:topic_id])
-		if @topic.update(params.require(:topic).permit(:draft , :title))
+		if @topic.update(params.require(:topic).permit(:draft , :title , :t_content))
 			flash[:notice] = "OOOO"
 			redirect_to draft_users_path
 		else
@@ -36,15 +47,8 @@ class UsersController < ApplicationController
 	# 	@favorite = Favorite.where( :user_id => @user.id )
 	# end
 
-	def update
-		@user = User.new(params.require(:user).permit(:nickname , :current_password ))
-		if @user.save
-			flash[:notice] = "更新成功"
-			redirect_to profile_users_path
-		else
-			flash[:notice] = "更新失敗"
-			render 
-		end
+	def write_user
+		params.require(:user).permit(:nickname , :avatar)
 	end
 
 end
