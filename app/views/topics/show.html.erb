@@ -15,14 +15,11 @@
 			<%= button_to "Like" , like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" %>
 		<% end %>
 	<% end %>
-
-	<br>
-
-	
+	<br>	
 	<div class="users">
 		<h3 class="text-center">關注的使用者</h3>
 		<% @favorite_users.each do |user| %>
-			<%= user.email %>
+			<%= user.email %> <p>	</p>
 		<% end %>
 	</div>
 		

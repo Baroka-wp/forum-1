@@ -30,15 +30,22 @@
 		<tr>
 			<th>主題</th>
 			<th>發文者</th>
+			<th>回覆者</th>
 			<th>最後回覆時間</th>
 			<th>回覆</th>
 			<th>瀏覽數</th>
 		</tr>
 		
 		<% @topics.each do |t| %>
+			<% users = t.comments.includes(:user).pluck("user_id").uniq%>
 			<tr>
 				<td><%= link_to t.title , topic_path(t) %></td>
 				<td><%= link_to t.user.email , user_path(t.user) %></td>
+				<td>
+					<% users.each do |user| %>
+						<%= User.find_by_id(user).email %> 
+					<% end %>
+				</td>
 				<% if params.try(:order) == 'Update' %>
 					<td><%= t.comments.last.try(:created_at) %></td>
 				<% else %>
