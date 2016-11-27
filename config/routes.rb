@@ -7,12 +7,13 @@ Rails.application.routes.draw do
     resources :favorites , :controller => "user_favorites"
   	resources :topics
     collection do
-        get :profile
         get :favorite
         get :like
         get :draft
         patch :update_draft
+        get :profile , param: :useremail
     end
+
   end
 
 

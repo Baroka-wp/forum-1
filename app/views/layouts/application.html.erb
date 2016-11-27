@@ -15,7 +15,7 @@
 			<% if current_user %>
 				<%= image_tag current_user.avatar.url(:thumb) %>
 				<div class="btn-group">
-				  <%= link_to current_user.email , profile_users_path , :type => "button" , :class => "btn btn-info" %>
+				  <%= link_to current_user.email , profile_users_path(:useremail => current_user.email) , :type => "button" , :class => "btn btn-info" %>
 				  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    <span class="caret"></span>
 				    <span class="sr-only">Toggle Dropdown</span>

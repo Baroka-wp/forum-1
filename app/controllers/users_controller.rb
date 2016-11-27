@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 	end
 
 	def profile
-		@user = current_user
+		@user = User.find_by(email: params[:useremail])
 		@topics = @user.topics
 		@comments = @user.comments
 	end
