@@ -3,7 +3,13 @@
 		<%= link_to "後台" , admin_topics_path , :class => "btn btn-danger btn-lg pull-right" %>
 	<% end %>
 	<h1>Forum</h1>
-	
+
+	<%= form_tag topics_path , :method => :get do %>
+		<%= text_field_tag "search" , nil , size: 50 %>
+		<%= submit_tag "Search Tag" , :class => "btn btn-info" %>
+	<% end %>
+
+	<br>
 
 	<%= link_to "About" , about_topics_path , :class => "btn btn-default pull-right" %>
 

@@ -13,7 +13,8 @@ namespace :dev do
 			10.times do |i|
 				e.topics.create(	:title => Faker::Pokemon.name,
 									:t_content => Faker::Lorem.sentence(100),
-									:user_id =>	e.id)
+									:user_id =>	e.id,
+									:draft => false)
 			end
 		end
 	end

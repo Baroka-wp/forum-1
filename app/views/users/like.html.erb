@@ -7,13 +7,11 @@
 			<th>User</th>
 		</tr>
 		
-		<% @favorites.each do |favorite| %>
+		<% @likes.each do |like| %>
 			<tr>
-				<td><%= favorite.topic.title %></td>
-				<td><%= favorite.topic.user.email %></td>
+				<td><%= like.topic.title %></td>
+				<td><%= like.topic.user.email %></td>
 			</tr>
 		<% end %>
-		
 	</table>
-	
 </div>

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     member do 
       post :favorite
       post :like
+      post :subscribe
+      post :create_tag
     end
   end
 
@@ -33,8 +35,5 @@ Rails.application.routes.draw do
     resources :users
     resources :categories
   end
-
-
-
 
 end

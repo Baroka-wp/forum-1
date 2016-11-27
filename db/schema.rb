@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124132328) do
+ActiveRecord::Schema.define(version: 20161126124104) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +57,30 @@ ActiveRecord::Schema.define(version: 20161124132328) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "subscribes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_subscribes_on_topic_id"
+    t.index ["user_id"], name: "index_subscribes_on_user_id"
+  end
+
+  create_table "tag_topicships", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tag_topicships_on_tag_id"
+    t.index ["topic_id"], name: "index_tag_topicships_on_topic_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string   "title"
     t.text     "t_content"
@@ -70,6 +94,8 @@ ActiveRecord::Schema.define(version: 20161124132328) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "likes_count",         default: 0
+    t.index ["likes_count"], name: "index_topics_on_likes_count"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 

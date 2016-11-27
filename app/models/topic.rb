@@ -9,6 +9,10 @@ class Topic < ApplicationRecord
 	has_many :favorited_users , :through => :favorites , :source => :user
 	has_many :likes , :dependent => :destroy
 	has_many :liked_users , :through => :likes , :source => :user
+	has_many :subscribes , :dependent => :destroy
+	has_many :subscribed_users , :through => :subscribes , :source => :user
+	has_many :tag_topicships , :dependent => :destroy
+	has_many :tags , :through => :tag_topicships , :dependent => :destroy
 
 	delegate :id , :to => :categories , :prefix => true , :allow_nil => true
 

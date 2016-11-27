@@ -1,0 +1,49 @@
+<div class="col-md-4 text-center">
+			<% if current_user.favorited_topics.include?(@topic) %>
+				<%= button_to "Delete My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
+			<% else %>
+				<%= button_to "Add My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary"  %>
+	 		<% end %>
+		</div>
+		
+		<div class="col-md-4 text-center">
+			<% if current_user.subscribed_topics.include?(@topic) %>
+				<%= button_to "UnSubscribe" , subscribe_topic_path(@topic) , :remote => true , :id => "subscribe" , :class => "btn btn-warning" %>
+			<% else %>
+				<%= button_to "Subscribe" , subscribe_topic_path(@topic) , :remote => true , :id => "subscribe" , :class => "btn btn-warning" %>
+			<% end %>
+		</div>
+	 		
+	 	<div class="col-md-4 text-center">
+	 		<% if current_user.liked_topics.include?(@topic) %>
+				<div class="like_button">
+						<%= button_to like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" do %>Unlike
+						<span class="badge"><%= @topic.likes_count %></span>
+					<% end %>
+				</div>
+				
+			<% else %>
+				<div class="like_button">
+					<%= button_to like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" do %>Like 				<span class="badge"><%= @topic.likes_count %></span>
+					<% end %>
+				</div>
+			<% end %>
+	 	</div>
+			
+		<br><br>
+
+		<div class="tag">
+			<div class="form-group">
+				<%= form_for @tag , :url => create_tag_topic_path(@topic , @tag) do |f| %>
+					<%= f.text_field :name %>
+					<%= f.submit :class => "btn btn-success" %>
+				<% end %>
+			</div>
+		
+			<%= form_for @topic , :url => topic_path(@topic) , :method => :patch do |f| %>
+				<div class="form-group">
+					<%= f.collection_check_boxes(:tag_ids , Tag.all , :id , :name) %>
+				</div>
+				<%= f.submit "Add Tags" , :class => "btn btn-success" %>
+			<% end %>
+		</div>

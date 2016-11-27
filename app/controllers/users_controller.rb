@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
 	def like
 		@user = current_user
-		@favorites = @user.favorites
+		@likes = @user.likes
 	end
 
 	# def favorite

@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
 
 	before_action :find_user
+	before_action :find_topic , :except => [:index , :new , :create , :about ]
 	
 	def index
 
@@ -19,19 +20,25 @@ class TopicsController < ApplicationController
 		@topics = Topic.includes(:comments , :user).where( :draft => false ).order(sort_by).page(params[:page]).per(15)
 		
 		if params[:keyword] 
-			@search_by = params[:keyword]
-			@topics = Topic.includes(:comments , :user , :categories).where( :draft => false ).where( "categories.id" => @search_by ).order(sort_by).page(params[:page]).per(15)
+			@keyword_by = params[:keyword]
+			@topics = Topic.includes(:comments , :user , :categories).where( :draft => false ).where( "categories.id" => @keyword_by ).order(sort_by).page(params[:page]).per(15)
+		end
+
+		if params[:search]
+			@search_by = params[:search]
+			@topics = Topic.includes(:tags).where("tags.name" => @search_by).page(params[:page]).per(15)
 		end
 		#@topics = Topic.where('id = 1').or(Topic.where(:user_id => "3")).page(params[:page]).per(15)
 	end
 
 	def show 
-		@topic = Topic.find(params[:id])
 		views = 1 + @topic.views_count
 		@topic.update(:views_count => views)
 		@comment = @topic.comments.where( :draft => false )
 		@favorite_users = @topic.liked_users
 		@favorite = @user.favorites.build
+		@tag = Tag.new
+		@tags = Tag.all
 	end
 
 	def new
@@ -50,11 +57,10 @@ class TopicsController < ApplicationController
 	end
 
 	def edit
-		@topic = Topic.find(params[:id])
+		
 	end
 
 	def update
-		@topic = Topic.find(params[:id])
 		if @topic.update(wirte_topic)
 			flash[:notice] = "更新成功"
 			redirect_to topic_path(@topic)
@@ -64,7 +70,6 @@ class TopicsController < ApplicationController
 	end
 
 	def destroy
-		@topic = Topic.find(params[:id])
 		@topic.destroy
 		flash[:alert] = "刪除成功"
 		redirect_to topics_path
@@ -77,7 +82,6 @@ class TopicsController < ApplicationController
 	end
 
 	def favorite
-		@topic = Topic.find(params[:id])
 		@favorite = current_user.favorites.find_by_topic_id(@topic)
 		if current_user.favorited_topics.include?(@topic)
 			@favorite.destroy
@@ -91,16 +95,38 @@ class TopicsController < ApplicationController
 	end
 
 	def like
-		@topic = Topic.find(params[:id])
 		if current_user.liked_topics.include?(@topic)
 			current_user.liked_topics.delete(@topic)
 		else
 			Like.create!( :topic => @topic, :user => current_user )
 		end
-
+		@topic.reload
 		respond_to do |format|
 			format.html { redirect_to event_path(@event) }
 			format.js
+		end
+	end
+
+	def subscribe
+		if current_user.subscribed_topics.include?(@topic)
+			current_user.subscribed_topics.delete(@topic)
+		else
+			Subscribe.create!(:topic => @topic , :user => current_user)
+		end
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def create_tag
+		@tag = Tag.new(params.require(:tag).permit(:name))
+		if @tag.save
+			flash[:noitce] = "OOO"
+			redirect_to topic_path(@topic)
+		else
+			flash[:alert] = "XXX"
+			render "show"
 		end
 	end
 
@@ -111,8 +137,12 @@ class TopicsController < ApplicationController
 		@user = current_user
 	end
 
+	def find_topic
+		@topic = Topic.find(params[:id])
+	end
+
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :avatar , :category_ids => [] )
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :avatar , { :category_ids => [] } , { :tag_ids => [] } )
 	end
 
 

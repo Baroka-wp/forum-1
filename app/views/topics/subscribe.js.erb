@@ -1,0 +1,8 @@
+<% if current_user.subscribed_topics.include?(@topic) %>
+	<% value = "UnSubscribe" %>
+<% else %>
+	<% value = "Subscribe" %>
+<% end %>
+
+$("#subscribe").val("<%= value %>")
+

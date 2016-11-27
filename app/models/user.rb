@@ -15,6 +15,8 @@ class User < ApplicationRecord
 	has_many :favorited_topics , :through => :favorites , :source => :topic
 	has_many :likes , :dependent => :destroy
 	has_many :liked_topics , :through => :likes , :source => :topic
+	has_many :subscribes , :dependent => :destroy
+	has_many :subscribed_topics , :through => :subscribes , :source => :topic
 
 	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/

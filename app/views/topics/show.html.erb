@@ -1,19 +1,10 @@
 <div class="container">
 	<br>
+	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
+	<br>
 
 	<% if current_user %>
-		<% if current_user.favorited_topics.include?(@topic) %>
-			<%= button_to "Delete My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
-		<% else %>
-			<%= button_to "Add My Favorites" , favorite_topic_path(@topic) , :remote => true , :id => "favorite" , :class => "btn btn-primary" %>
- 		<% end %>
- 		<br>
-
-		<% if current_user.liked_topics.include?(@topic) %>
-			<%= button_to "Unlike" , like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" %>
-		<% else %>
-			<%= button_to "Like" , like_topic_path(@topic) , :remote => true , :id => "like" , :class => "btn btn-info" %>
-		<% end %>
+		<%= render :partial => "current_control" %>
 	<% end %>
 	<br>	
 	<div class="users">
@@ -22,9 +13,6 @@
 			<%= user.email %> <p>	</p>
 		<% end %>
 	</div>
-		
-
-	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	
 	<div class="clearfix"></div>
 		<%= form_for @topic do |f|  %>
@@ -77,5 +65,6 @@
 		<% end %>
 	</div>
 
+	
 </div>
 	
