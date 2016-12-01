@@ -34,7 +34,8 @@ class TopicsController < ApplicationController
 	def show 
 		views = 1 + @topic.views_count
 		@topic.update(:views_count => views)
-		@comment = @topic.comments.where( :draft => false )
+		@comment = @topic.comments.build
+		@comments = @topic.comments.where( :draft => false )
 		@favorite_users = @topic.liked_users
 		@favorite = @user.favorites.build
 		@tag = Tag.new
@@ -76,9 +77,9 @@ class TopicsController < ApplicationController
 	end
 
 	def about
-		@users = User.all
-		@topics = Topic.all
-		@comments = Comment.all
+		@users_count = User.all.size
+		@topics_count = Topic.all.size
+		@comments_count = Comment.all.size
 	end
 
 	def favorite

@@ -10,10 +10,19 @@ class TopicCommentsController < ApplicationController
 	def create
 		@comment = @topic.comments.build( write_comment )
 		if @comment.save
-			flash[:notice] = "回覆成功"
-			redirect_to topic_path(@topic)
+			@comment.reload
+			respond_to do |format|
+			format.html {
+				flash[:notice] = "回覆成功"
+				redirect_to topic_path(@topic)
+			}
+			format.js
+			end
 		else
-			render "new"
+			respond_to do |format|
+				format.html {render "new"}
+				format.js
+			end	
 		end
 	end
 

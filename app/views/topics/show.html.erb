@@ -1,7 +1,7 @@
 <div class="container">
 	<br>
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
-	<br>
+	<br><br>
 
 	<% if current_user %>
 		<%= render :partial => "current_control" %>
@@ -13,11 +13,14 @@
 			<%= user.email %> <p>	</p>
 		<% end %>
 	</div>
+
+	<%= form_for @comment , :url => topic_comments_path(@topic , @comment) , :remote => true do |f| %>
+		<%= render :partial => "comment_form" , :locals => {:f => f} %>
+	<% end %>
 	
 	<div class="clearfix"></div>
 		<%= form_for @topic do |f|  %>
 			<div class="btn">
-				<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
 				<% if current_user == @topic.user %>
 					<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger" %>
 					<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success" %>
@@ -45,7 +48,7 @@
 
 
 	<div class="form-group">
-		<% @comment.each do |c| %>
+		<% @comments.each do |c| %>
 			<%= form_for c , :url => "" do |f| %>
 				<% if c.user == current_user %>
 					<%= link_to "Edit" , edit_topic_comment_path(@topic , c) , :class => "btn btn-success" %>

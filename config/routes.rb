@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   end
 
-
   resources :topics do
   	resources :comments , :controller => "topic_comments"
   	collection do
@@ -35,6 +34,17 @@ Rails.application.routes.draw do
     resources :topics 
     resources :users
     resources :categories
+  end
+
+  namespace :api , path: '' do
+    # constraints(host: 'api-example.com') do
+
+    # end
+  end
+
+  namespace :api do
+    resources :users
+    get '*unmatched_route', to: 'base#page_404'
   end
 
 end

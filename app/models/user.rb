@@ -21,12 +21,18 @@ class User < ApplicationRecord
 	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "50x50>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  	def get_fb_data
+ 		j = RestClient.get "https://graph.facebook.com/v2.5/me", :params => { :access_token => self.fb_token, :fields => "id,name,email,picture" }
+ 		JSON.parse(j)
+	end
 
 	def self.from_omniauth(auth)
 	     # Case 1: Find existing user by facebook uid
 	     user = User.find_by_fb_uid( auth.uid )
 	     if user
 	        user.fb_token = auth.credentials.token
+	        user.avatar = auth.info.image
+
 	        #user.fb_raw_data = auth
 	        user.save!
 	       return user
@@ -51,5 +57,8 @@ class User < ApplicationRecord
 	     #user.fb_raw_data = auth
 	     user.save!
 	     return user
-   end
+	end
+
+	
+
 end
