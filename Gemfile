@@ -35,9 +35,12 @@ gem 'faker'
 gem 'devise'
 gem 'omniauth-facebook'
 gem "paperclip", "~> 5.0.0"
+gem 'rack-cors', :require => 'rack/cors'
+gem 'rest-client'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rspec-rails'
   gem 'byebug', platform: :mri
 end
 
