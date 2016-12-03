@@ -10,7 +10,6 @@ class TopicCommentsController < ApplicationController
 	def create
 		@comment = @topic.comments.build( write_comment )
 		if @comment.save
-			@comment.reload
 			respond_to do |format|
 			format.html {
 				flash[:notice] = "回覆成功"

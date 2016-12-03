@@ -5,6 +5,9 @@ class Api::UsersController < Api::BaseController
 	#   method: "POST",
 	#   success: function(data) { console.log(data) }
 	# })
+	# data: { turbolinks: 'false' }
+	before_action(except: [:index]) { add_crumb('Users', admin_users_path) }
+
 
 
 	def index
@@ -18,8 +21,13 @@ class Api::UsersController < Api::BaseController
 		render json: { user: @user } #, status: 40
 	end
 
+		
 	def create
-		@user = User.all
-		render json: { user: @user } #, status: 40
-	end
+	  	@user = User.new(params.require(:user).permit(:email , :password))
+	  	if @user.save
+	  		render json: {user: @user}
+	  	else
+	  		respond_error messages :@user.errors.full_messages
+	  	end
+  	end
 end

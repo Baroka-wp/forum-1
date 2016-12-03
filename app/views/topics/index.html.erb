@@ -3,7 +3,7 @@
 		<%= link_to "後台" , admin_topics_path , :class => "btn btn-danger btn-lg pull-right" %>
 	<% end %>
 	<h1>Forum</h1>
-
+	
 	<%= form_tag topics_path , :method => :get do %>
 		<%= text_field_tag "search" , nil , size: 50 %>
 		<%= submit_tag "Search Tag" , :class => "btn btn-info" %>
@@ -25,10 +25,12 @@
 		<%= link_to "Sort by Count of Reply" , topics_path( :order => "Reply" , :keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "Sort by Count of Views" , topics_path( :order => "Views" , :keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "Sort by Default" , topics_path(:keyword => @search_by ) , :class => "btn btn-primary" %>
-		<%= link_to "New" , new_topic_path , :class => "btn btn-primary" %>
 	</div>
-		
+
 	<br>
+	<%= link_to "New" , new_topic_path , :class => "btn btn-success" %>
+	<br>
+	
 	<%= paginate @topics %>
 	
 

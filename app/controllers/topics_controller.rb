@@ -49,7 +49,13 @@ class TopicsController < ApplicationController
 
 	def create
 		@topic = @user.topics.build(wirte_topic)
+		@tag = params['topic']['t_content'].split(/#/)
+		@tag.shift
 		if @topic.save
+			@tag.each do |s|
+				@c_tag = Tag.create(:name => s.rstrip)
+				@topic.tag_topicships.create(:tag_id => @c_tag.id)
+			end
 			flash[:notice] = "新增成功"
 			redirect_to topics_path
 		else
@@ -103,7 +109,6 @@ class TopicsController < ApplicationController
 		end
 		@topic.reload
 		respond_to do |format|
-			format.html { redirect_to event_path(@event) }
 			format.js
 		end
 	end

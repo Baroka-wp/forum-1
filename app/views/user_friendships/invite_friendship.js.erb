@@ -1,0 +1,10 @@
+<% if current_user.friends.include?(@user) %>
+	var value = "Uninvite Friend"
+	$("#friend_<%= @user.id %>").removeClass();
+	$("#friend_<%= @user.id %>").addClass('btn btn-danger')
+<% else %>
+	var value = "Invite Friend"
+	$("#friend_<%= @user.id %>").removeClass();
+	$("#friend_<%= @user.id %>").addClass('btn btn-info')
+<% end %>
+$("#friend_<%= @user.id %>").val(value)

@@ -1,6 +1,6 @@
 class Api::BaseController < ApplicationController
 	
-	before_action :authorize_header_token
+	# before_action :authorize_header_token
 	skip_before_action :verify_authenticity_token
 	#before_action :enable_cors
 	before_action :set_default_format
@@ -46,7 +46,7 @@ class Api::BaseController < ApplicationController
 	end
 
 	def respond_500(exception)
-		responde_error(exception.message , 500)
+		respond_error(exception.message , 500)
 	end
 
 end
