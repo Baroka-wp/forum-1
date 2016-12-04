@@ -2,7 +2,7 @@
 	<h2><%= @topic.user.email %></h2>
 	<p><%= @topic.created_at %></p>
 	<div class="form-group">
-		<%= form_for @topic , :url => topic_path(@topic) , :method => :patch do |f| %>
+		<%= form_for @topic , :url => topic_path(@topic) , :html => { :multipart => true } , :method => :patch do |f| %>
 			<%= render :partial => "form" , :locals => {:f => f} %>
 			<%= link_to "Cancel" , topic_path(@topic) , :class => "btn btn-primary pull-right" %>
 		<% end %>

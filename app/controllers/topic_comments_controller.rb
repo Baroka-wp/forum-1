@@ -10,19 +10,8 @@ class TopicCommentsController < ApplicationController
 	def create
 		@comment = @topic.comments.build( write_comment )
 		if @comment.save
-<<<<<<< HEAD
-			@comment.reload
-			respond_to do |format|
-			format.html {
-				flash[:notice] = "回覆成功"
-				redirect_to topic_path(@topic)
-			}
-			format.js
-			end
-||||||| merged common ancestors
 			flash[:notice] = "回覆成功"
 			redirect_to topic_path(@topic)
-=======
 			respond_to do |format|
 			format.html {
 				flash[:notice] = "回覆成功"
@@ -30,7 +19,6 @@ class TopicCommentsController < ApplicationController
 			}
 			format.js
 			end
->>>>>>> feature
 		else
 			respond_to do |format|
 				format.html {render "new"}

@@ -34,6 +34,7 @@ class TopicsController < ApplicationController
 	def show 
 		views = 1 + @topic.views_count
 		@topic.update(:views_count => views)
+		@images = Image.where(:topic_id => @topic.id)
 		@comment = @topic.comments.build
 		@comments = @topic.comments.where( :draft => false )
 		@favorite_users = @topic.liked_users
@@ -48,10 +49,13 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-		@topic = @user.topics.build(wirte_topic)
 		@tag = params['topic']['t_content'].split(/#/)
-		@tag.shift
+		params['topic']['t_content'] = @tag.shift
+		@topic = @user.topics.build(wirte_topic)
 		if @topic.save
+			params['images'].each do |image|
+				@topic.images.create(image: image)
+			end
 			@tag.each do |s|
 				@c_tag = Tag.create(:name => s.rstrip)
 				@topic.tag_topicships.create(:tag_id => @c_tag.id)
@@ -148,7 +152,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :avatar , { :category_ids => [] } , { :tag_ids => [] } )
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , { :category_ids => [] } , { :tag_ids => [] } )
 	end
 
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :friendships , :controller => "user_friendships" do
       collection do 
         get :friend_request
+        get :friendship
         post :invite_friendship
         post :accept_friendship
         post :refuse_friendship
@@ -43,20 +44,6 @@ Rails.application.routes.draw do
     resources :categories
   end
 
-<<<<<<< HEAD
-  namespace :api , path: '' do
-    # constraints(host: 'api-example.com') do
-
-    # end
-  end
-
-  namespace :api do
-    resources :users
-    get '*unmatched_route', to: 'base#page_404'
-  end
-
-||||||| merged common ancestors
-=======
   namespace :api , path: '' do
     # constraints(host: 'api-example.com') do
 
@@ -73,6 +60,5 @@ Rails.application.routes.draw do
     resources :users
     get '*unmatched_route', to: 'base#page_404'
   end
-
->>>>>>> feature
 end
+

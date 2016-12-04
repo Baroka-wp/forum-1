@@ -4,6 +4,7 @@
 	<%= link_to "My Favorite" , favorite_users_path , :class => "btn btn-info" %>
 	<%= link_to "My Draft" , draft_users_path , :class => "btn btn-warning" %>
 	<%= link_to "My Like" , like_users_path , :class => "btn btn-success" %>
+	<%= link_to "My Friends" , friendship_user_friendships_path(current_user) , :class => "btn btn-info" %>
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	
 	<div class="clearfix"></div>
@@ -47,8 +48,10 @@
 
 	<% @comments.each  do |c| %>
 		<%= form_for c , :url => "" do |f| %>
+		<div class="form-group">
 			<%= f.label :c_content , "Content : " %>
 			<%= f.text_area :c_content , :rows => "20" , :class => "form-control" %>
+		</div>
 			<%= f.hidden_field :user_id , :value => @user.id %>
 		<% end %>
 	<% end %>

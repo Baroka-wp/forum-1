@@ -7,7 +7,11 @@
 <% end %>
 
 <div class="form-group">
-	<%= f.file_field :avatar %>
+	<div class="file-field">
+		<%= file_field_tag "images[]" , :type => :file %>
+	</div>
+	<br>
+	<span id="new_file" class="btn btn-warning">More File</span>
 </div>
 <div class="form-group">
 	<%= f.label :draft , "Draft" %>
@@ -26,3 +30,12 @@
 	<%= f.hidden_field :user_id , :value => @user.id %>
 </div>
 	<%= f.submit :class => "btn btn-success" %>
+
+
+<script>
+	$(document).ready(function(){
+		$('#new_file').click(function(){
+			$('.file-field').append('<%= file_field_tag "images[]" , :type => :file %>');
+		});
+	});	
+</script>

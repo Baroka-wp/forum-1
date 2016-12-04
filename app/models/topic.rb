@@ -13,10 +13,8 @@ class Topic < ApplicationRecord
 	has_many :subscribed_users , :through => :subscribes , :source => :user
 	has_many :tag_topicships , :dependent => :destroy
 	has_many :tags , :through => :tag_topicships , :dependent => :destroy
+	has_many :images , :dependent => :destroy
 
 	delegate :id , :to => :categories , :prefix => true , :allow_nil => true
-
-	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 	
 end

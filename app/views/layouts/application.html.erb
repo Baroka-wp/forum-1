@@ -10,8 +10,8 @@
   </head>
 
   <body>
-
 	<div class="container">
+		<div class="fb-like" data-href="http://www.localhost:3000/" data-width="20px" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 		<div class="pull-right">
 			<% if current_user %>
  				<% if current_user.friendships.count < current_user.inverse_friendships.count %>
@@ -68,3 +68,12 @@
 
   </body>
 </html>
+
+<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.8&appId=1852697651643312";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>

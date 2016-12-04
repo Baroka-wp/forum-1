@@ -1,12 +1,15 @@
 <div class="container">
 	
 	<h2><%= @user.nickname ? @user.nickname : @user.email %></h2>
-		
-	<% if current_user.friends.include?(@user) %>
-		<%= button_to "Uninvite Friend" , invite_friendship_user_path(@user) , :id => "friend_#{@user.id}" , :class => "btn btn-danger" , :remote => true %>
-	<% else %>
-		<%= button_to "Invite Friend" , invite_friendship_user_path(@user) , :id => "friend_#{@user.id}" , :class => "btn btn-info" , :remote => true %>
+	
+	<% if current_user != @user %>
+		<% if current_user.friends.include?(@user) %>
+			<td><%= button_to "Uninvite Friend" , invite_friendship_user_friendships_path(@user) , :id => "friend_#{@user.id}" , :class => "btn btn-danger" , :remote => true %></td>
+		<% else %>
+			<td><%= button_to "Invite Friend" , invite_friendship_user_friendships_path(@user) , :id => "friend_#{@user.id}" , :class => "btn btn-info" , :remote => true %></td>
+		<% end %>
 	<% end %>
+		
 
 	<p>這傢伙很懶，什麼都沒留下。</p>
 	

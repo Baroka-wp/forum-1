@@ -1,5 +1,9 @@
 class UserFriendshipsController < ApplicationController
 
+	def friendship
+		@friends = User.find(current_user).inverse_friendships.where(:user_id => User.find(current_user).friendships.pluck(:friend_id))
+	end
+
 	def friend_request
 		@friend_request = User.find(current_user).inverse_friendships.where.not(:user_id => User.find(current_user).friendships.pluck(:friend_id))
 	end
