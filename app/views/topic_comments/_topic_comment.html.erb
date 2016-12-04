@@ -1,0 +1,18 @@
+<div class="form-group">
+	<%= form_for @comment , :url => "" do |f| %>
+		<% if @comment.user == current_user %>
+			<%= link_to "Edit" , edit_topic_comment_path(@topic , @comment) , :class => "btn btn-success" %>
+			<%= link_to "Delete" , topic_comment_path(@topic , @comment) , :method => :delete , :class => "btn btn-danger" , :remote => true %>
+		<% end %>
+		<h2>Reply : </h2>
+			<% if @topic.avatar.url != "/images/original/missing.png" %>
+			<div class="form-group text-center">
+				<%= image_tag @comment.avatar.url %>
+			</div>
+		<% end %>
+		<h3><%= @comment.user.email %></h3>
+		<p><%= @comment.created_at %></p>
+		<%= f.label :c_content , "Content : " %>
+		<%= f.text_area :c_content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
+	<% end %>
+</div>

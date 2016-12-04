@@ -35,8 +35,15 @@ gem 'faker'
 gem 'devise'
 gem 'omniauth-facebook'
 gem "paperclip", "~> 5.0.0"
+<<<<<<< HEAD
 gem 'rack-cors', :require => 'rack/cors'
 gem 'rest-client'
+||||||| merged common ancestors
+=======
+gem 'rack-cors', :require => 'rack/cors'
+gem 'rest-client'
+
+>>>>>>> feature
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -14,7 +14,16 @@
 	<div class="container">
 		<div class="pull-right">
 			<% if current_user %>
-				<%= image_tag current_user.avatar.url(:thumb) %>
+ 				<% if current_user.friendships.count < current_user.inverse_friendships.count %>
+					<%= link_to "Friend Request" , friend_request_user_friendships_path(current_user) , :class => "btn btn-success" %>
+ 				<% end %>
+
+				<% if current_user.fb_uid %>
+					<%= image_tag current_user.avatar_file_name %>
+				<% else %>
+					<%= image_tag current_user.avatar.url(:thumb) %>
+				<% end %>
+					
 				<div class="btn-group">
 				  <%= link_to current_user.email , profile_users_path(:useremail => current_user.email) , :type => "button" , :class => "btn btn-info" %>
 				  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,6 +41,7 @@
 				<%= link_to('註冊', new_registration_path(:user)) %> |
 			    <%= link_to('登入', new_session_path(:user)) %> |
 			    <%= link_to "登入 Facebook", user_facebook_omniauth_authorize_path %>
+
 			<% end %>    
 		</div>
 	</div>

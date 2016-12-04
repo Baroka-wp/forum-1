@@ -4,6 +4,14 @@ Rails.application.routes.draw do
   root :to => "topics#index"
 
   resources :users do 
+    resources :friendships , :controller => "user_friendships" do
+      collection do 
+        get :friend_request
+        post :invite_friendship
+        post :accept_friendship
+        post :refuse_friendship
+      end
+    end
     resources :favorites , :controller => "user_favorites"
   	resources :topics
     collection do
@@ -13,7 +21,6 @@ Rails.application.routes.draw do
         patch :update_draft
         get :profile , param: :useremail
     end
-
   end
 
   resources :topics do
@@ -36,6 +43,7 @@ Rails.application.routes.draw do
     resources :categories
   end
 
+<<<<<<< HEAD
   namespace :api , path: '' do
     # constraints(host: 'api-example.com') do
 
@@ -47,4 +55,24 @@ Rails.application.routes.draw do
     get '*unmatched_route', to: 'base#page_404'
   end
 
+||||||| merged common ancestors
+=======
+  namespace :api , path: '' do
+    # constraints(host: 'api-example.com') do
+
+    # end
+  end
+
+
+  namespace :api do
+    resources :users
+    get '*unmatched_route', to: 'base#page_404'
+  end
+
+  namespace :test do
+    resources :users
+    get '*unmatched_route', to: 'base#page_404'
+  end
+
+>>>>>>> feature
 end

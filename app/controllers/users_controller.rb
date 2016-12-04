@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
+
+	def index
+		@users = User.where.not(:id => current_user)
+	end
+
 	def show
-		@user = current_user
+		@user = User.find(params[:id])
 	end
 
 	def update 
 		@user = current_user
 		if @user.update(write_user)
 			flash[:notice] = "OOOO"
-			redirect_to profile_users_path
+			redirect_to profile_users_path(:useremail => current_user.email)
 		else
 			flash[:alert] = "XXXX"
 			render "profile"
