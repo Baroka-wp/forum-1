@@ -7,11 +7,8 @@
 	<%= form_tag topics_path , :method => :get do %>
 		<%= text_field_tag "search" , nil , size: 50 %>
 		<%= submit_tag "Search Tag" , :class => "btn btn-info" %>
+		<%= link_to "About" , about_topics_path , :class => "btn btn-default pull-right" %>
 	<% end %>
-
-	<br>
-
-	<%= link_to "About" , about_topics_path , :class => "btn btn-default pull-right" %>
 
 	<div class="check_box">
 		<% @categories.each do |c| %>
@@ -26,11 +23,9 @@
 		<%= link_to "Sort by Count of Views" , topics_path( :order => "Views" , :keyword => @search_by ) , :class => "btn btn-primary" %>
 		<%= link_to "Sort by Default" , topics_path(:keyword => @search_by ) , :class => "btn btn-primary" %>
 	</div>
-
 	<br>
 	<%= link_to "New" , new_topic_path , :class => "btn btn-success" %>
 	<br>
-	
 	<%= paginate @topics %>
 	
 
@@ -45,13 +40,19 @@
 		</tr>
 		
 		<% @topics.each do |t| %>
-			<% users = t.comments.includes(:user).pluck("user_id").uniq%>
+			<%# users = t.comments.includes(:user).pluck("user_id").uniq%>
+			<% comment_users = [] %>
+			<% t.comments.each do |comments| %>
+				<% comment_users.push(comments.user.email) %>
+			<% end %>
+			<% comment_users.uniq! %>
+			
 			<tr>
 				<td><%= link_to t.title , topic_path(t) %></td>
 				<td><%= link_to t.user.email , user_path(t.user) %></td>
 				<td>
-					<% users.each do |user| %>
-						<%= User.find_by_id(user).email %> 
+					<% comment_users.each do |user| %>
+						<%= user %>
 					<% end %>
 				</td>
 				<% if params.try(:order) == 'Update' %>

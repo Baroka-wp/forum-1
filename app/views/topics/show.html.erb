@@ -56,7 +56,7 @@
 					<%= link_to "Delete" , topic_comment_path(@topic , c) , :method => :delete , :class => "btn btn-danger" , :remote => true %>
 				<% end %>
 				<h2>Reply : </h2>
-					<% if @topic.avatar.url != "/images/original/missing.png" %>
+					<% if c.avatar.url != "/images/original/missing.png" %>
 					<div class="form-group text-center">
 						<%= image_tag c.avatar.url %>
 					</div>
