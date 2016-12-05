@@ -128,5 +128,11 @@
 	border-bottom: 1px solid #9CB3BC;
 }
 
+#draft-time {
+	display: none;
+}
 
+.show {
+	display: block;
+}
 

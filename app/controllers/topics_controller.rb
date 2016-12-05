@@ -5,6 +5,14 @@ class TopicsController < ApplicationController
 	
 	def index
 
+		#  @topic.draft_time > Time.zone.now
+		@topics_draft = Topic.where(:draft => true)
+		@topics_draft.each do |draft|
+			if Time.now > draft.draft_time 
+				draft.update(:draft => false)
+			end
+		end
+
 		@categories = Category.all
 
 		case params[:order]
@@ -53,9 +61,12 @@ class TopicsController < ApplicationController
 		params['topic']['t_content'] = @tag.shift
 		@topic = @user.topics.build(wirte_topic)
 		if @topic.save
-			params['images'].each do |image|
-				@topic.images.create(image: image)
+			if params['images']
+				params['images'].each do |image|
+					@topic.images.create(image: image)
+				end
 			end
+
 			@tag.each do |s|
 				@c_tag = Tag.create(:name => s.rstrip)
 				@topic.tag_topicships.create(:tag_id => @c_tag.id)
@@ -152,7 +163,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , { :category_ids => [] } , { :tag_ids => [] } )
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :draft_time , { :category_ids => [] } , { :tag_ids => [] } )
 	end
 
 

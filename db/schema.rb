@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204063646) do
+ActiveRecord::Schema.define(version: 20161204095759) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20161204063646) do
     t.integer  "views_count",    default: 0
     t.boolean  "draft"
     t.integer  "likes_count",    default: 0
+    t.datetime "draft_time"
     t.index ["likes_count"], name: "index_topics_on_likes_count"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
