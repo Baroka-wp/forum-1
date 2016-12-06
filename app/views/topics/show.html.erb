@@ -14,10 +14,12 @@
 		<% end %>
 	</div>
 
-	<%= form_for @comment , :url => topic_comments_path(@topic , @comment) , :remote => true do |f| %>
-		<%= render :partial => "comment_form" , :locals => {:f => f} %>
+	<% if @topic.limit == 3 %>
+		<%= form_for @comment , :url => topic_comments_path(@topic , @comment) , :remote => true do |f| %>
+			<%= render :partial => "comment_form" , :locals => {:f => f} %>
+		<% end %>
 	<% end %>
-	
+
 	<div class="clearfix"></div>
 		<%= form_for @topic do |f|  %>
 			<div class="btn">

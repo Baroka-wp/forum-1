@@ -16,13 +16,13 @@ class TopicsController < ApplicationController
 		@categories = Category.all
 
 		case params[:order]
-		when "Update"
-			sort_by = "comments.created_at DESC"
-		when "Reply"
-			sort_by = "comments_count DESC"
-		when "Views"
-			sort_by = "views_count DESC"
-		when "created_at"
+			when "Update"
+				sort_by = "comments.created_at DESC"
+			when "Reply"
+				sort_by = "comments_count DESC"
+			when "Views"
+				sort_by = "views_count DESC"
+			when "created_at"
 		end
 		
 		@topics = Topic.includes(:comments , :user).where( :draft => false ).order(sort_by).page(params[:page]).per(15)
@@ -40,11 +40,12 @@ class TopicsController < ApplicationController
 	end
 
 	def show 
+		limit(@topic.limit_id)
 		views = 1 + @topic.views_count
 		@topic.update(:views_count => views)
 		@images = Image.where(:topic_id => @topic.id)
 		@comment = @topic.comments.build
-		@comments = @topic.comments.where( :draft => false )
+		@comments = @topic.comments.where(:draft => false)
 		@favorite_users = @topic.liked_users
 		@favorite = @user.favorites.build
 		@tag = Tag.new
@@ -163,8 +164,24 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :draft_time , { :category_ids => [] } , { :tag_ids => [] } )
+		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :draft_time , :limit_id , { :category_ids => [] } , { :tag_ids => [] } )
 	end
 
+	def limit(id)
+		case id
+			when 1
+				if current_user != @topic.user
+					flash[:alert] = "你沒有權限"
+					redirect_to :back
+				end
+			when 2
+				if current_user != @topic.user
+					if !(current_user.friendships.find_by_friend_id(@topic.user.id) && current_user.inverse_friendships.find_by_user_id(@topic.user.id))
+						flash[:alert] = "你沒有權限"
+						redirect_to :back
+					end
+				end
+		end
+	end
 
 end

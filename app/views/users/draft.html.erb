@@ -20,22 +20,5 @@
 		<% end %>
 	<% end %>
 
-	<h3>Comments : </h3>
-	<% @comments.each do |c| %>
-		<%= form_for c , :url => topic_path(c) , :method => :patch do |f| %>
-			<div class="form-group">
-				<%= f.label :title , "Title : " %>
-				<%= f.text_field :title , :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.label :t_content , "Content : " %>
-				<%= f.text_area :t_content , :rows => "15" , :class => "form-control" %>
-			</div>
-			<div class="form-group">
-				<%= f.hidden_field :draft , :value => "true" %>
-			</div>
-
-		<% end %>
-	<% end %>
 </div>
 	
