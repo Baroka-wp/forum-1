@@ -48,7 +48,6 @@ class User < ApplicationRecord
 	       existing_user.fb_uid = auth.uid
 	       existing_user.fb_token = auth.credentials.token
 	       existing_user.avatar_file_name = auth.info.image
-	       byebug
 	       #existing_user.fb_raw_data = auth
 	       existing_user.save!
 	       return existing_user

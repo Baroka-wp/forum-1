@@ -30,9 +30,12 @@
 				    <span class="sr-only">Toggle Dropdown</span>
 				  </button>
 				  <ul class="dropdown-menu">
-			  	
+			  		<li><%= link_to "我的書籤" , favorite_users_path %></li>
+					<li><%= link_to "我的草稿" , draft_users_path %></li>
+					<li><%= link_to "我的讚" , like_users_path %></li>
+					<li><%= link_to "我的好友" , friendship_user_friendships_path(current_user) %></li>
+					<li role="separator" class="divider"></li>
 					<li><%= link_to('修改密碼', edit_registration_path(:user) ) %></li>
-				    <li role="separator" class="divider"></li>
 				    <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
 			    </ul>
 				</div>

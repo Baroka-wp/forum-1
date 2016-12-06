@@ -1,10 +1,6 @@
 <div class="container">
 	<h2>Hello! <%= @user.email %></h2>
 
-	<%= link_to "My Favorite" , favorite_users_path , :class => "btn btn-info" %>
-	<%= link_to "My Draft" , draft_users_path , :class => "btn btn-warning" %>
-	<%= link_to "My Like" , like_users_path , :class => "btn btn-success" %>
-	<%= link_to "My Friends" , friendship_user_friendships_path(current_user) , :class => "btn btn-info" %>
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	
 	<div class="clearfix"></div>
