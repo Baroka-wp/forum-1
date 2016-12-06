@@ -1,0 +1,46 @@
+current directory: /Users/linshangwei/Desktop/forum/vendor/bundle/ruby/2.3.0/gems/mysql2-0.4.5/ext/mysql2
+/usr/local/opt/ruby/bin/ruby -r ./siteconf20161206-2110-fsxznp.rb extconf.rb
+checking for rb_absint_size()... yes
+checking for rb_absint_singlebit_p()... yes
+checking for ruby/thread.h... yes
+checking for rb_thread_call_without_gvl() in ruby/thread.h... yes
+checking for rb_thread_blocking_region()... no
+checking for rb_wait_for_single_fd()... yes
+checking for rb_hash_dup()... yes
+checking for rb_intern3()... yes
+checking for rb_big_cmp()... yes
+-----
+Using mysql_config at /usr/local/bin/mysql_config
+-----
+checking for mysql.h... yes
+checking for SSL_MODE_DISABLED in mysql.h... yes
+checking for SSL_MODE_PREFERRED in mysql.h... yes
+checking for SSL_MODE_REQUIRED in mysql.h... yes
+checking for SSL_MODE_VERIFY_CA in mysql.h... yes
+checking for SSL_MODE_VERIFY_IDENTITY in mysql.h... yes
+checking for errmsg.h... yes
+checking for mysqld_error.h... yes
+-----
+Setting rpath to /usr/local/Cellar/mysql/5.7.16/lib
+-----
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/linshangwei/Desktop/forum/vendor/bundle/ruby/2.3.0/extensions/x86_64-darwin-16/2.3.0/mysql2-0.4.5/mkmf.log
+
+current directory: /Users/linshangwei/Desktop/forum/vendor/bundle/ruby/2.3.0/gems/mysql2-0.4.5/ext/mysql2
+make "DESTDIR=" clean
+
+current directory: /Users/linshangwei/Desktop/forum/vendor/bundle/ruby/2.3.0/gems/mysql2-0.4.5/ext/mysql2
+make "DESTDIR="
+compiling client.c
+compiling infile.c
+compiling mysql2_ext.c
+compiling result.c
+compiling statement.c
+linking shared-object mysql2/mysql2.bundle
+
+current directory: /Users/linshangwei/Desktop/forum/vendor/bundle/ruby/2.3.0/gems/mysql2-0.4.5/ext/mysql2
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 mysql2.bundle ./.gem.20161206-2110-ij2fib/mysql2
