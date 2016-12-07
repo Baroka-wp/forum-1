@@ -9,7 +9,7 @@ namespace :dev do
 		User.create( :email => "blacks@yahoo.com.tw" , :password => "123456" )
 		10.times do
 			User.first.topics.create(	:limit_id => 4,
-										:title => Faker::Pokemon.name,
+										:title => Faker::Lorem.sentence(3),
 										:t_content => Faker::Lorem.sentence(100),
 										:user_id =>	1)
 		end
@@ -18,7 +18,7 @@ namespace :dev do
 			e = User.create(:email => Faker::Internet.email , :password => "123456" )
 			10.times do |i|
 				e.topics.create(	:limit_id => 4,
-									:title => Faker::Pokemon.name,
+									:title => Faker::Lorem.sentence(3),
 									:t_content => Faker::Lorem.sentence(100),
 									:user_id =>	e.id,
 									:draft => false)
