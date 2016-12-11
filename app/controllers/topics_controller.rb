@@ -58,8 +58,8 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-		@tag = params['topic']['t_content'].split(/#/)
-		params['topic']['t_content'] = @tag.shift
+		@tag = params['topic']['content'].split(/#/)
+		params['topic']['content'] = @tag.shift
 		@topic = @user.topics.build(wirte_topic)
 		if @topic.save
 			if params['images']
@@ -164,7 +164,7 @@ class TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :draft_time , :limit_id , { :category_ids => [] } , { :tag_ids => [] } )
+		params.require(:topic).permit(:title , :content , :user_id , :comments_count , :views_count , :draft , :draft_time , :limit_id , { :category_ids => [] } , { :tag_ids => [] } )
 	end
 
 	def limit(id)

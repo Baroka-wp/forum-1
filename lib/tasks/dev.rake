@@ -10,7 +10,7 @@ namespace :dev do
 		10.times do
 			User.first.topics.create(	:limit_id => 4,
 										:title => Faker::Pokemon.name,
-										:t_content => Faker::Lorem.sentence(100),
+										:content => Faker::Lorem.sentence(100),
 										:user_id =>	1)
 		end
 
@@ -19,7 +19,7 @@ namespace :dev do
 			10.times do |i|
 				e.topics.create(	:limit_id => 4,
 									:title => Faker::Pokemon.name,
-									:t_content => Faker::Lorem.sentence(100),
+									:content => Faker::Lorem.sentence(100),
 									:user_id =>	e.id,
 									:draft => false)
 			end

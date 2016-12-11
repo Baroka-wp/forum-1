@@ -1,5 +1,5 @@
 class Topic < ApplicationRecord
-	validates_presence_of :t_content , :counter_cache => true
+	validates_presence_of :content , :counter_cache => true
 
 	belongs_to :user
 	belongs_to :limit

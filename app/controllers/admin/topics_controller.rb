@@ -39,7 +39,7 @@ class Admin::TopicsController < ApplicationController
 	end
 
 	def wirte_topic
-		params.require(:topic).permit(:title , :t_content , :user_id , :comments_count , :views_count , :draft , :category_ids => [] )
+		params.require(:topic).permit(:title , :content , :user_id , :comments_count , :views_count , :draft , :category_ids => [] )
 	end
 
 	def authenticate_admin

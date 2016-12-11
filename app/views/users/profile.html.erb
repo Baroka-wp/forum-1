@@ -33,8 +33,8 @@
 				<%= f.label :title , "Title : " %>
 				<%= f.text_field :title , :class => "form-control" %>
 			</div>
-				<%= f.label :t_content , "Content : " %>
-				<%= f.text_area :t_content , :rows => "20" , :class => "form-control" %>
+				<%= f.label :content , "Content : " %>
+				<%= f.text_area :content , :rows => "20" , :class => "form-control" %>
 			<div class="form-group">
 				<%= f.hidden_field :t_time , :value => Time.now %>
 				<%= f.hidden_field :user_id , :value => @user.id %>

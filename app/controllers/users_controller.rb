@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
 	def update_draft
 		@topic = Topic.find(params[:topic_id])
-		if @topic.update(params.require(:topic).permit(:draft , :title , :t_content))
+		if @topic.update(params.require(:topic).permit(:draft , :title , :content))
 			flash[:notice] = "OOOO"
 			redirect_to draft_users_path
 		else
