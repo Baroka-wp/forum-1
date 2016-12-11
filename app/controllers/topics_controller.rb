@@ -177,7 +177,7 @@ class TopicsController < ApplicationController
 			when 2
 				if current_user != @topic.user
 					if !(current_user.friendships.find_by_friend_id(@topic.user.id) && current_user.inverse_friendships.find_by_user_id(@topic.user.id))
-						flash[:alert] = "你沒有權限"
+						flash[:alert] = "想看就加我好友！！！！！！！！！！！！！！！！！！！！！！！！"
 						redirect_to :back
 					end
 				end

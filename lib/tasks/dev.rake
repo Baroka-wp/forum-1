@@ -9,8 +9,16 @@ namespace :dev do
 		User.create( :email => "blacks@yahoo.com.tw" , :password => "123456" )
 		10.times do
 			User.first.topics.create(	:limit_id => 4,
+<<<<<<< HEAD
 										:title => Faker::Pokemon.name,
 										:content => Faker::Lorem.sentence(100),
+||||||| merged common ancestors
+										:title => Faker::Pokemon.name,
+										:t_content => Faker::Lorem.sentence(100),
+=======
+										:title => Faker::Lorem.sentence(3),
+										:t_content => Faker::Lorem.sentence(100),
+>>>>>>> 8bfa26570da6700f8c2eb7a879259953306b27f5
 										:user_id =>	1)
 		end
 
@@ -18,8 +26,16 @@ namespace :dev do
 			e = User.create(:email => Faker::Internet.email , :password => "123456" )
 			10.times do |i|
 				e.topics.create(	:limit_id => 4,
+<<<<<<< HEAD
 									:title => Faker::Pokemon.name,
 									:content => Faker::Lorem.sentence(100),
+||||||| merged common ancestors
+									:title => Faker::Pokemon.name,
+									:t_content => Faker::Lorem.sentence(100),
+=======
+									:title => Faker::Lorem.sentence(3),
+									:t_content => Faker::Lorem.sentence(100),
+>>>>>>> 8bfa26570da6700f8c2eb7a879259953306b27f5
 									:user_id =>	e.id,
 									:draft => false)
 			end
