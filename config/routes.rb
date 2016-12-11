@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         get :like
         get :draft
         patch :update_draft
-        get :profile , param: :useremail
+        get :profile , param: :useremail # XXX
     end
   end
 

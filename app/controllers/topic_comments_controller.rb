@@ -13,11 +13,11 @@ class TopicCommentsController < ApplicationController
 			flash[:notice] = "回覆成功"
 			redirect_to topic_path(@topic)
 			respond_to do |format|
-			format.html {
-				flash[:notice] = "回覆成功"
-				redirect_to topic_path(@topic)
-			}
-			format.js
+				format.html {
+					flash[:notice] = "回覆成功"
+					redirect_to topic_path(@topic)
+				}
+				format.js
 			end
 		else
 			respond_to do |format|
