@@ -19,14 +19,9 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-<<<<<<< HEAD
 /config/facebook.yml
 /public/system/images
 /public/system/topics
 /public/system/users
-||||||| merged common ancestors
 /config/facebook.yml
-=======
-/config/facebook.yml
-/public/system/images
->>>>>>> 8bfa26570da6700f8c2eb7a879259953306b27f5
+
