@@ -9,8 +9,8 @@
 		
 		<% @likes.each do |like| %>
 			<tr>
-				<td><%= like.topic.title %></td>
-				<td><%= like.topic.user.email %></td>
+				<td><%= link_to like.topic.title , topic_path(like.topic) %></td>
+				<td><%= link_to like.topic.user.email , user_path(like.topic.user) %></td>
 			</tr>
 		<% end %>
 	</table>
