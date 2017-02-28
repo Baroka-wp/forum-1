@@ -12,7 +12,7 @@
 		<% end %>
 		<h3><%= @comment.user.email %></h3>
 		<p><%= @comment.created_at %></p>
-		<%= f.label :c_content , "Content : " %>
-		<%= f.text_area :c_content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
+		<%= f.label :content , "Content : " %>
+		<%= f.text_area :content , :rows => "20" , :disabled => "disabled" , :class => "form-control" %>
 	<% end %>
 </div>

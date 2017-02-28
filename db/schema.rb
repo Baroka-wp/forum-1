@@ -61,13 +61,13 @@ ActiveRecord::Schema.define(version: 20161205080439) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "images_file_name"
-    t.string   "images_content_type"
-    t.integer  "images_file_size"
-    t.datetime "images_updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.integer  "topic_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["topic_id"], name: "index_images_on_topic_id"
   end
 

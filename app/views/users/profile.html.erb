@@ -45,8 +45,8 @@
 	<% @comments.each  do |c| %>
 		<%= form_for c , :url => "" do |f| %>
 		<div class="form-group">
-			<%= f.label :c_content , "Content : " %>
-			<%= f.text_area :c_content , :rows => "20" , :class => "form-control" %>
+			<%= f.label :content , "Content : " %>
+			<%= f.text_area :content , :rows => "20" , :class => "form-control" %>
 		</div>
 			<%= f.hidden_field :user_id , :value => @user.id %>
 		<% end %>
